@@ -1,0 +1,9 @@
+Package: chenimbalance
+Title: Allelic imbalance mapping procedure from Chen et al. A uniform survey of allele-specific binding and expression over 1000-Genomes-Project individuals (2016)
+Version: 0.0.0.9000
+Authors@R: person("Anthony", "Aylward", email = "aaylward@eng.ucsd.edu", role = c("aut", "cre"))
+Description: Provides utilities for mapping allelic imbalance.
+Depends: R (>= 3.4.4)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
