@@ -38,13 +38,14 @@ graded_weights_for_sse_calculation <- function(r_min, r_max, bins) {
 #' @param bins Breakpoints for bins
 #' @return Histogram of allelic ratios
 #' @export
-empirical_allelic_ratio <- function(data, bins, maxN, minN = 6) {
+empirical_allelic_ratio <- function(data, bins, maxN, minN = 6, plot = FALSE) {
   data.match <- data[data[["total"]] <= maxN & data[["total"]] >= minN,]
   h <- hist(
     data.match[["allelicRatio"]],
     xlim = range(0, 1),
     breaks = bins,
-    right = TRUE
+    right = TRUE,
+    plot = plot
   )
   h[["counts"]] / sum(h[["counts"]])
 }
@@ -56,7 +57,7 @@ empirical_allelic_ratio <- function(data, bins, maxN, minN = 6) {
 #' @seealso \code{\link{weighted_expected_binomial}}
 #' @export
 weight_by_empirical_counts <- function(total) {
-  t <- as.data.frame(table(total, stringsAsFactors = FALSE))
+  t <- as.data.frame(table(total), stringsAsFactors = FALSE)
   w <- matrix(0, max(total), 1)
 
   for (j in 1:nrow(t)) {
@@ -139,7 +140,9 @@ weight_with_actual_counts_in_empirical <- function(
   d.combined,
   d,
   w,
+  i,
   k,
+  ptr,
   minN = 6
 ) {
   d.w <- d * w[i, 1]
@@ -213,9 +216,11 @@ nulldistrib <- function(
     d <- parametric_probability_mass(k, i, distrib = distrib, p = p, b = b)
     d.combined <- weight_with_actual_counts_in_empirical(
       d.combined,
-      w,
       d,
+      w,
+      i,
       k,
+      ptr,
       minN = minN
     )
     ptr <- ptr + length(k)

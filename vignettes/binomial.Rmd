@@ -45,8 +45,16 @@ w.grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
 minN <- 6
 maxN <- min(2500, max(data[["total"]]))
 apropor <- length(data[["total"]][data[["total"]] <= 2500]) / nrow(data)
-empirical <- empirical_allelic_ratio(data, bins, maxN = maxN, minN = minN)
+empirical <- empirical_allelic_ratio(
+  data,
+  bins,
+  maxN = maxN,
+  minN = minN,
+  plot = TRUE
+)
+```
 
+```{r}
 # weighted expected binomial
 d.combined.sorted.binned <- weighted_expected_binomial(
   data[["total"]],
