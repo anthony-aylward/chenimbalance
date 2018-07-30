@@ -174,35 +174,3 @@ nulldistrib <- function(
   d.combined.sorted <- d.combined[order(d.combined[,1], d.combined[,2]),]
   bin_according_to_empirical_distribution(d.combined.sorted, binSize = binSize)
 }
-
-#' Weighted expected binomial 
-#'
-#' Plot the binomial distribution for each n
-#'
-#' dbinom(seq(0,500),n=500,p=0.5) gives the pdf of 0-500, at n=500, p=0.5 in
-#' binomial distrib
-#'
-#' weight each probability by the number of SNPs with n reads
-#'
-#' @param total Vector containing coverage per variant
-#' @param binSize Approximate number of bins
-#' @return weighted expected binomial values
-#' @export
-weighted_expected_binomial <- function(
-  w,
-  minN = 6,
-  p = 0.5,
-  binSize = 40,
-  distrib = "binomial",
-  b = 0
-) {
-  w <- weight_by_empirical_counts(total)
-  d.combined.sorted.binned <- nulldistrib(
-    w,
-    minN = minN,
-    p = p,
-    binSize = binSize,
-    distrib = distrib,
-    b = b
-  )
-}

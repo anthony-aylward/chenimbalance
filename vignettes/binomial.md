@@ -62,6 +62,15 @@ empirical <- empirical_allelic_ratio(
 
 Plot the empirical and weighted expected binomial distributions
 
+Weighted expected binomial 
+
+Plot the binomial distribution for each n
+
+`dbinom(seq(0,500),n=500,p=0.5)` gives the pdf of 0-500, at `n=500`, `p=0.5` in
+binomial distrib
+
+weight each probability by the number of SNPs with n reads
+
 
 ```r
 w <- weight_by_empirical_counts(data[["total"]])
