@@ -64,8 +64,9 @@ Plot the empirical and weighted expected binomial distributions
 
 
 ```r
-d.combined.sorted.binned <- weighted_expected_binomial(
-  data[["total"]],
+w <- weight_by_empirical_counts(data[["total"]])
+d.combined.sorted.binned <- nulldistrib(
+  w,
   minN = minN,
   binSize = binSize
 )
@@ -103,4 +104,22 @@ Compute the sum of squared errors for the binomial distribution.
 sse = sum((empirical - d.combined.sorted.binned[,2])^2)
 sse
 #> [1] 0.005153999
+```
+
+# weighted betabinomial distribution
+very naive way of automating the process of finding b parameter automatically
+using least sum of squares of errors (between the density plots of empirical 
+and the expected distributions)
+
+
+```r
+r.sta = 0
+r.end = 0.99
+r.by  = 0.1
+b.range = seq(r.sta,r.end,by=r.by)
+labels = matrix(0,50,1)
+ctr = 1
+b.choice = 0
+b.and.sse = matrix(0, 50, 2)
+colnames(b.and.sse) <- c('b','sse')
 ```

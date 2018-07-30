@@ -1,5 +1,5 @@
 #===============================================================================
-# alleledb_calcOverdispersion.R
+# weighted_expected_binomial.R
 #===============================================================================
 
 # Imports ======================================================================
@@ -11,67 +11,13 @@
 
 # Functions ====================================================================
 
-#' @title Graded weights for SSE calculation
-#'
-#' @param r_min Range minimum
-#' @param r_max Range maximum
-#' @param bins Breakpoints mapped to unit interval
-#' @return Graded weights for SSE calculation
-#' @export
-graded_weights_for_sse_calculation <- function(r_min, r_max, bins) {
-  r <- seq(r_min, r_max, 2 * (r_max - r_min) / (length(bins) - 1))
-  r <- r[2:length(r)]
-  if ((length(bins)-1)%%2 != 0) {
-    c(r, sort(r[1:(length(r)-1)], decreasing = TRUE)) 
-  } else {
-    c(r, sort(r[1:length(r)], decreasing = TRUE))
-  }
-}
-
-#' @title Empirical allelic Ratio
-#'
-#' @details
-#' Plot right closed interval left open (range] for x axis
-#' note that you have pseudozeroes as counts in your data so thats fine
-#'
-#' @param data A data frame with columns "total" and "allelicRatio"
-#' @param bins Breakpoints for bins
-#' @return Histogram of allelic ratios
-#' @export
-empirical_allelic_ratio <- function(data, bins, maxN, minN = 6, plot = FALSE) {
-  data.match <- data[data[["total"]] <= maxN & data[["total"]] >= minN,]
-  h <- hist(
-    data.match[["allelicRatio"]],
-    xlim = range(0, 1),
-    breaks = bins,
-    right = TRUE,
-    plot = plot
-  )
-  h[["counts"]] / sum(h[["counts"]])
-}
-
-#' Weight by empirical counts
-#'
-#' @param total Vector containing coverage per variant
-#' @return A one-column matrix of weights for each coverage level
-#' @seealso \code{\link{weighted_expected_binomial}}
-#' @export
-weight_by_empirical_counts <- function(total) {
-  t <- as.data.frame(table(total), stringsAsFactors = FALSE)
-  w <- matrix(0, max(total), 1)
-
-  for (j in 1:nrow(t)) {
-    w[as.integer(t[j, 1]), 1] <- t[j, 2]
-  }
-  w
-}
-
-#' Change "counts" into density
+#' @title Change "counts" into density
 #'
 #' @param d.combined.sorted.binned The combined, sorted, and binned
 #'   pseudodensity
 #' @return The combined, sorted, and binned density
 #' @export
+#' @seealso \code{\link{bin_according_to_empirical_distribution}}
 change_counts_into_density <- function(d.combined.sorted.binned) {
   d.combined.sorted.binned[,2] <- d.combined.sorted.binned[,2] / sum(
     d.combined.sorted.binned[,2]
@@ -91,6 +37,7 @@ change_counts_into_density <- function(d.combined.sorted.binned) {
 #' @param binSize Integer. The approximate number of bins.
 #' @return The binned density
 #' @export
+#' @seealso \code{\link{nulldistrib}}
 bin_according_to_empirical_distribution <- function(
   d.combined.sorted,
   binSize = 40
@@ -136,6 +83,7 @@ bin_according_to_empirical_distribution <- function(
 #' @return The combined pseudodistribution weighted by the empirical
 #'   distribution
 #' @export
+#' @seealso \code{\link{nulldistrib}}
 weight_with_actual_counts_in_empirical <- function(
   d.combined,
   d,
@@ -169,6 +117,7 @@ weight_with_actual_counts_in_empirical <- function(
 #' @param p Numeric. The binomial parameter.
 #' @param b Numeric. The beta parameter.
 #' @export
+#' @seealso \code{\link{nulldistrib}}
 parametric_probability_mass <- function(
   k,
   i,
@@ -192,13 +141,11 @@ parametric_probability_mass <- function(
 #' pdf(n, k, p) * (num of empirical SNPs at n counts)
 #'
 #' @param minN Minimum coverage (min total num of reads (since it's left open right closed))
-#' @param maxN Maximum coverage
 #' @param p Binomial parameter (null probability)
 #' @param w Data frame or matrix giving 
 #' @return The weighted null beta/binomial probability mass function
 #' @export
 #' @seealso \code{\link{weighted_expected_binomial}}
-#' @export
 nulldistrib <- function(
   w,
   minN = 6,
@@ -232,7 +179,8 @@ nulldistrib <- function(
 #'
 #' Plot the binomial distribution for each n
 #'
-#' dbinom(seq(0,500),n=500,p=0.5) gives the pdf of 0-500, at n=500, p=0.5 in binomial distrib
+#' dbinom(seq(0,500),n=500,p=0.5) gives the pdf of 0-500, at n=500, p=0.5 in
+#' binomial distrib
 #'
 #' weight each probability by the number of SNPs with n reads
 #'
@@ -241,7 +189,7 @@ nulldistrib <- function(
 #' @return weighted expected binomial values
 #' @export
 weighted_expected_binomial <- function(
-  total,
+  w,
   minN = 6,
   p = 0.5,
   binSize = 40,
