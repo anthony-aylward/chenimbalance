@@ -4,7 +4,7 @@
 \alias{empirical_allelic_ratio}
 \title{Empirical allelic Ratio}
 \usage{
-empirical_allelic_ratio(data, bins, maxN, minN = 6)
+empirical_allelic_ratio(data, bins, maxN, minN = 6, plot = FALSE)
 }
 \arguments{
 \item{data}{A data frame with columns "total" and "allelicRatio"}

@@ -1,7 +1,7 @@
 ---
 title: "Weighted expected binomial model"
 author: "Anthony Aylward"
-date: "`r Sys.Date()`"
+date: "2018-07-30"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -9,16 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-## Prepare the data.
 
-```{r}
+First, prepare the data.
+
+
+```r
 library(chenimbalance)
 total_reads <- rowSums(accb[, c("cA", "cC", "cG", "cT")])
 data <- data.frame(
@@ -31,11 +27,19 @@ data <- data.frame(
   )
 )
 head(data)
+#>   total allelicRatio
+#> 1    45    1.0000000
+#> 2    59    0.5423729
+#> 3   114    0.4736842
+#> 4    53    0.5094340
+#> 5   119    0.5042017
+#> 6    21    0.0952381
 ```
 
-## Binomial distribution
+Then, analyze.
 
-```{r}
+
+```r
 # graded weights for SSE calculation
 binSize <- 40
 bins <- pretty(0:1, binSize)
@@ -54,9 +58,12 @@ empirical <- empirical_allelic_ratio(
 )
 ```
 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+
 Plot the empirical and weighted expected binomial distributions
 
-```{r}
+
+```r
 d.combined.sorted.binned <- weighted_expected_binomial(
   data[["total"]],
   minN = minN,
@@ -87,9 +94,13 @@ plot(
 )
 ```
 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+
 Compute the sum of squared errors for the binomial distribution.
 
-```{r}
+
+```r
 sse = sum((empirical - d.combined.sorted.binned[,2])^2)
 sse
+#> [1] 0.005153999
 ```

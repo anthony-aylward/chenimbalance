@@ -204,7 +204,6 @@ nulldistrib <- function(
   minN = 6,
   p = 0.5,
   binSize = 40,
-  yuplimit = 0.15,
   distrib = "binomial",
   b = 0
 ) {
@@ -246,7 +245,6 @@ weighted_expected_binomial <- function(
   minN = 6,
   p = 0.5,
   binSize = 40,
-  yuplimit = 0.15,
   distrib = "binomial",
   b = 0
 ) {
@@ -256,7 +254,6 @@ weighted_expected_binomial <- function(
     minN = minN,
     p = p,
     binSize = binSize,
-    yuplimit = yuplimit,
     distrib = distrib,
     b = b
   )

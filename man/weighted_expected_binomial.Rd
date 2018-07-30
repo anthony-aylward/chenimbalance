@@ -5,7 +5,7 @@
 \title{Weighted expected binomial}
 \usage{
 weighted_expected_binomial(total, minN = 6, p = 0.5, binSize = 40,
-  yuplimit = 0.15, distrib = "binomial", b = 0)
+  distrib = "binomial", b = 0)
 }
 \arguments{
 \item{total}{Vector containing coverage per variant}
