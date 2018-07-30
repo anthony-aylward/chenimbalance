@@ -1,0 +1,57 @@
+---
+title: "Weighted expected binomial model"
+author: "Anthony Aylward"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+First, prepare the data.
+
+```{r}
+library(chenimbalance)
+total_reads <- rowSums(accb[, c("cA", "cC", "cG", "cT")])
+data <- data.frame(
+  total = total_reads,
+  allelicRatio = sapply(
+    1:nrow(accb),
+    function(i) {
+      accb[[paste("c", accb[["ref"]][[i]], sep = "")]][[i]] / total_reads[[i]]
+    }
+  )
+)
+head(data)
+```
+
+Then, analyze.
+
+```{r}
+# graded weights for SSE calculation
+binSize <- 40
+bins <- pretty(0:1, binSize)
+w.grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
+
+# empirical allelic Ratio
+minN <- 6
+maxN <- min(2500, max(data[["total"]]))
+apropor <- length(data[["total"]][data[["total"]] <= 2500]) / nrow(data)
+empirical <- empirical_allelic_ratio(data, bins, maxN = maxN, minN = minN)
+
+# weighted expected binomial
+d.combined.sorted.binned <- weighted_expected_binomial(
+  data[["total"]],
+  minN = minN,
+  binSize = binSize
+)
+head(d.combined.sorted.binned)
+```
