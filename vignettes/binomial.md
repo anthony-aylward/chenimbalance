@@ -11,7 +11,7 @@ vignette: >
 
 
 
-First, prepare the data.
+## Prepare the data.
 
 
 ```r
@@ -36,7 +36,7 @@ head(data)
 #> 6    21    0.0952381
 ```
 
-Then, analyze.
+## Binomial distribution
 
 
 ```r
