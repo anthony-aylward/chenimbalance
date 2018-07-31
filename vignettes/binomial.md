@@ -117,50 +117,7 @@ plot(
   ylim = c(0, yuplimit),
   pch = 16,
   type = 'b',
-  col = colors[[1]]],
-  bty = 'n',
-  ylab = '',
-  xlab = '',
-  yaxt = 'n',
-  xaxt = 'n',
-  yaxs = "i"
-)
-#> Error: <text>:45:20: unexpected ']'
-#> 44:   type = 'b',
-#> 45:   col = colors[[1]]]
-#>                        ^
-```
-
-Compute the sum of squared errors for the binomial distribution.
-
-
-```r
-sse = sum((empirical - d.combined.sorted.binned[,2])^2)
-sse
-#> [1] 0.005153999
-```
-
-weighted betabinomial distribution
-very naive way of automating the process of finding b parameter automatically
-using least sum of squares of errors (between the density plots of empirical 
-and the expected distributions)
-
-
-```r
-overdispersion_details <- choose_overdispersion_parameter(
-  w.grad,
-  w,
-  empirical,
-  sse
-)
-par(new = TRUE)
-#> Warning in par(new = TRUE): calling par(new=TRUE) with no plot
-plot(
-  overdispersion_details[["e.combined.sorted.binned"]],
-  ylim = c(0, yuplimit),
-  pch = 16,
-  type = 'b',
-  col = colors[counter],
+  col = colors[[1]],
   bty = 'n',
   ylab = '',
   xlab = '',
@@ -173,4 +130,11 @@ plot(
 #> Error in plot.window(...): need finite 'xlim' values
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+
+Compute the sum of squared errors for the binomial distribution.
+
+weighted betabinomial distribution
+very naive way of automating the process of finding b parameter automatically
+using least sum of squares of errors (between the density plots of empirical 
+and the expected distributions)
