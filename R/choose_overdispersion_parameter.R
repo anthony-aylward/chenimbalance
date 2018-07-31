@@ -11,20 +11,6 @@
 
 # Functions ====================================================================
 
-#' @title Compute a beta-binomial null distribution
-#'
-#' @param k The overdispersion parameter
-#' @return the beta-binomial null distribution
-compute_betabinom_null <- function(k) {
-  nulldistrib(
-    w,
-    minN = minN,
-    binSize = binSize,
-    distrib = "betabinomial",
-    b = k
-  )
-}
-
 #' @title Choose overdispersion parameter
 #'
 #' @description Minimize sse for betabinomials
@@ -61,7 +47,15 @@ choose_overdispersion_parameter <- function(
   for (i in seq(to = length(b_range), by = n_cores)) {
     distribution_list <- mclapply(
       b_range[i:(i + n_cores - 1)],
-      compute_betabinom_null,
+      function(k) {
+        nulldistrib(
+          w,
+          minN = minN,
+          binSize = binSize,
+          distrib = "betabinomial",
+          b = k
+        )
+      },
       mc.cores = n_cores
     )
     for (j in 1:max(n_cores, length(b_range) - i)) {
@@ -150,7 +144,15 @@ optimize_overdispersion_parameter <- function(
     for (i in seq(to = length(b_range), by = n_cores)) {
       distribution_list <- mclapply(
         b_range[i:(i + n_cores - 1)],
-        compute_betabinom_null,
+        function(k) {
+          nulldistrib(
+            w,
+            minN = minN,
+            binSize = binSize,
+            distrib = "betabinomial",
+            b = k
+          )
+        },
         mc.cores = n_cores
       )
       for (j in 1:max(n_cores, length(b_range) - i)) {
