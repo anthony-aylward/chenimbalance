@@ -95,14 +95,13 @@ plot(
   xaxt='n',
   yaxs="i"
 )
+sse = sum((empirical - d.combined.sorted.binned[,2])^2)
 overdispersion_details <- choose_overdispersion_parameter(
   w.grad,
   w,
   empirical,
   sse
 )
-sse = sum((empirical - d.combined.sorted.binned[,2])^2)
-sse
 par(new = TRUE)
 plot(
   overdispersion_details[["e.combined.sorted.binned"]],

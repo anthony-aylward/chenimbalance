@@ -107,16 +107,14 @@ plot(
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
 
 ```r
+sse = sum((empirical - d.combined.sorted.binned[,2])^2)
 overdispersion_details <- choose_overdispersion_parameter(
   w.grad,
   w,
   empirical,
   sse
 )
-#> Error in matrix(c(b_choice, sse, rep(0, 48)), nrow = 50, ncol = 2, byrow = TRUE, : object 'sse' not found
-sse = sum((empirical - d.combined.sorted.binned[,2])^2)
-sse
-#> [1] 0.005153999
+#> Error in choose_overdispersion_parameter(w.grad, w, empirical, sse): object 'w_grad' not found
 par(new = TRUE)
 plot(
   overdispersion_details[["e.combined.sorted.binned"]],
