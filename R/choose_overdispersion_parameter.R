@@ -62,7 +62,7 @@ choose_overdispersion_parameter <- function(
     counter <- counter + 1
   }
   list(
-    e_combined_sorted_binned = e_combined_sorted_binned,
+    e_combined_sorted_binned = e_combined_sorted_binned_cached,
     b_and_sse = b_and_sse,
     b_choice = b_choice,
     sse = sse,
