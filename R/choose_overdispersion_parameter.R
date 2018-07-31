@@ -55,6 +55,7 @@ choose_overdispersion_parameter <- function(
       b_choice <- k
       sse <- sse_bbin
       e_combined_sorted_binned_cached <- e_combined_sorted_binned
+      b_and_sse_cached <- b_and_sse
     } else if (sse_bbin > sse) {
       break
     }
@@ -63,7 +64,7 @@ choose_overdispersion_parameter <- function(
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned_cached,
-    b_and_sse = b_and_sse,
+    b_and_sse = b_and_sse_cached,
     b_choice = b_choice,
     sse = sse,
     labels = labels,
