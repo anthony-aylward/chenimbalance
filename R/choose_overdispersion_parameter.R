@@ -46,7 +46,7 @@ choose_overdispersion_parameter <- function(
   break_signal <- FALSE
   for (i in seq(to = length(b_range), by = n_cores)) {
     distribution_list <- mclapply(
-      b_range[i:max(length(b_range), i + n_cores - 1)],
+      b_range[i:min(length(b_range), i + n_cores - 1)],
       function(k) {
         nulldistrib(
           w,
@@ -58,7 +58,7 @@ choose_overdispersion_parameter <- function(
       },
       mc.cores = n_cores
     )
-    for (j in 1:max(n_cores, length(b_range) - i)) {
+    for (j in 1:min(n_cores, length(b_range) - i)) {
       k <- b_range[[i + j - 1]]
       e_combined_sorted_binned <- distribution_list[[j]]
       
@@ -143,7 +143,7 @@ optimize_overdispersion_parameter <- function(
     break_signal <- FALSE
     for (i in seq(to = length(b_range), by = n_cores)) {
       distribution_list <- mclapply(
-        b_range[i:max(length(b_range), i + n_cores - 1)],
+        b_range[i:min(length(b_range), i + n_cores - 1)],
         function(k) {
           nulldistrib(
             w,
@@ -155,7 +155,7 @@ optimize_overdispersion_parameter <- function(
         },
         mc.cores = n_cores
       )
-      for (j in 1:max(n_cores, length(b_range) - i)) {
+      for (j in 1:min(n_cores, length(b_range) - i)) {
         k <- b_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
 
