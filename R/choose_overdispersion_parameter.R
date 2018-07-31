@@ -65,7 +65,8 @@ choose_overdispersion_parameter <- function(
     b_and_sse = b_and_sse,
     b_choice = b_choice,
     sse = sse,
-    labsls = labels
+    labsls = labels,
+    counter = counter
   )
 }
 

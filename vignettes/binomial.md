@@ -36,7 +36,7 @@ head(data)
 #> 6    21    0.0952381
 ```
 
-## Binomial distribution
+## Empirical distribution
 
 Compute the empirical allelic ratio distribution
 
@@ -57,6 +57,8 @@ empirical <- empirical_allelic_ratio(
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+
+## Expected Binomial and Beta-Binomial distributions
 
 Compute the weighted expected binomial distribution
 
@@ -135,11 +137,11 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
   empirical,
-  counter,
+  overdispersion_details[["counter"]],
   minN = minN,
   binSize = binSize
 )
-#> Error in dbetabinom.ab(x = x, size = size, shape1 = prob * (1 - rho)/rho, : object 'counter' not found
+#> Error in if (any(ok3)) {: missing value where TRUE/FALSE needed
 plot_distributions(
   minN,
   maxN,

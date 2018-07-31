@@ -121,7 +121,7 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
   empirical,
-  counter,
+  overdispersion_details[["counter"]],
   minN = minN,
   binSize = binSize
 )
