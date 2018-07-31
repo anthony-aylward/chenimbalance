@@ -110,7 +110,7 @@ optimize_overdispersion_parameter <- function(
     sse <- b_and_sse[1, 2]
     b_choice <- 0
 
-    for (k in b.range) {
+    for (k in b_range) {
       e_combined_sorted_binned <- nulldistrib(
         w,
         minN = minN,

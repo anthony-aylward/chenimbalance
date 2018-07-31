@@ -139,7 +139,7 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   minN = minN,
   binSize = binSize
 )
-#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : object 'b.range' not found
+#> Error in dbetabinom.ab(x = x, size = size, shape1 = prob * (1 - rho)/rho, : object 'counter' not found
 plot_distributions(
   minN,
   maxN,

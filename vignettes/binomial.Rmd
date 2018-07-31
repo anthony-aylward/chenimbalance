@@ -33,7 +33,7 @@ data <- data.frame(
 head(data)
 ```
 
-## Binomial distribution
+## Empirical distribution
 
 Compute the empirical allelic ratio distribution
 
@@ -51,6 +51,8 @@ empirical <- empirical_allelic_ratio(
   plot = TRUE
 )
 ```
+
+## Expected Binomial and Beta-Binomial distributions
 
 Compute the weighted expected binomial distribution
 
