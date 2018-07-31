@@ -115,7 +115,8 @@ sse
 #> [1] 0.005153999
 ```
 
-# weighted betabinomial distribution
+weighted betabinomial distribution
+
 very naive way of automating the process of finding b parameter automatically
 using least sum of squares of errors (between the density plots of empirical 
 and the expected distributions)
