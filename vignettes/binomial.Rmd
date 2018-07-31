@@ -113,7 +113,7 @@ paste(
 )
 ```
 
-Optimise the overdispersion parameter
+Optimize the overdispersion parameter
 
 ```{r}
 #optimized_overdispersion_details <- optimize_overdispersion_parameter(

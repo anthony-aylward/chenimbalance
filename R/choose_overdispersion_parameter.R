@@ -18,7 +18,7 @@ choose_overdispersion_parameter <- function(
   minN = 6,
   binSize = 40,
   b_choice = 0,
-  r_sta = 0.2,
+  r_sta = 0.1,
   r_end = 0.99,
   r_by  = 0.1
 ) {
@@ -32,6 +32,7 @@ choose_overdispersion_parameter <- function(
   )
   labels <- matrix(0, nrow = 50, ncol = 1)
   b_range <- seq(r_sta, r_end, by = r_by)
+  
   for (k in b_range) {
     e_combined_sorted_binned <- nulldistrib(
       w,
@@ -62,7 +63,7 @@ choose_overdispersion_parameter <- function(
     counter <- counter + 1
   }
   list(
-    e_combined_sorted_binned = e_combined_sorted_binned_cached,
+    e_combined_sorted_binned = e_combined_sorted_binned,
     b_and_sse = b_and_sse,
     b_choice = b_choice,
     sse = sse,
