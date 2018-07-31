@@ -51,7 +51,7 @@ choose_overdispersion_parameter <- function(
       signif(sse_bbin, 2)
     )
     
-    if (sse_bbin < sse) {
+    if (sse_bbin < sse || b_choice == r_sta) {
       b_choice <- k
       sse <- sse_bbin
     } else if (sse_bbin > sse) {
@@ -143,6 +143,7 @@ optimize_overdispersion_parameter <- function(
       counter <- counter + 1
       newctr <- newctr + 1
     }
+    flag <- flag - 1
     labels = labels[1:(newctr + 1),]
     if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
       flag <- 0 
