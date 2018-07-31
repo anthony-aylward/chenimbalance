@@ -161,3 +161,18 @@ plot_distributions(
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+
+Check the optimized value
+
+
+```r
+list(
+  b = optimized_overdispersion_details[["b_choice"]],
+  sse = optimized_overdispersion_details[["sse"]]
+)
+#> $b
+#> [1] 0.025
+#> 
+#> $sse
+#> [1] 0.0005600451
+```
