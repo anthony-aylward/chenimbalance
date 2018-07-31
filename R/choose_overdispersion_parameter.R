@@ -2,9 +2,18 @@
 # choose_overdispersion_parameter.R
 #===============================================================================
 
-#' Choose overdispersion parameter
+# Imports ======================================================================
+
+#' @import parallel
+
+
+
+
+# Functions ====================================================================
+
+#' @title Choose overdispersion parameter
 #'
-#' Minimize sse for betabinomials
+#' @description Minimize sse for betabinomials
 #'
 #' @param data A data frame with columns "total" and "allelicRatio"
 #' @param bins Breakpoints for bins
@@ -32,34 +41,50 @@ choose_overdispersion_parameter <- function(
   )
   labels <- matrix(0, nrow = 50, ncol = 1)
   b_range <- seq(r_sta, r_end, by = r_by)
-  for (k in b_range) {
-    e_combined_sorted_binned <- nulldistrib(
-      w,
-      minN = minN,
-      binSize = binSize,
-      distrib = "betabinomial",
-      b = k
+  
+  n_cores <- detectCores()
+  break_signal <- FALSE
+  for (i in seq(to = length(b_range), by = n_cores)) {
+    distribution_list <- mclapply(
+      b_range[i:(i + n_cores - 1)],
+      function(k) {
+        nulldistrib(
+          w,
+          minN = minN,
+          binSize = binSize,
+          distrib = "betabinomial",
+          b = k
+        )
+      }
     )
-    
-    sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
-    b_and_sse[counter + 1, 1] <- k
-    b_and_sse[counter + 1, 2] <- sse_bbin
-    labels[counter] = paste(
-      "betabin,b=",
-      signif(k, 2),
-      "; SSE=",
-      signif(sse_bbin, 2)
-    )
-    
-    if (sse_bbin < sse || k == r_sta) {
-      b_choice <- k
-      sse <- sse_bbin
-      e_combined_sorted_binned_cached <- e_combined_sorted_binned
-    } else if (sse_bbin > sse) {
+    for (j in 1:n_cores) {
+      k <- b_range[[i + j - 1]]
+      e_combined_sorted_binned <- distribution_list[[j]]
+      
+      sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
+      b_and_sse[counter + 1, 1] <- k
+      b_and_sse[counter + 1, 2] <- sse_bbin
+      labels[counter] = paste(
+        "betabin,b=",
+        signif(k, 2),
+        "; SSE=",
+        signif(sse_bbin, 2)
+      )
+      
+      if (sse_bbin < sse || k == r_sta) {
+        b_choice <- k
+        sse <- sse_bbin
+        e_combined_sorted_binned_cached <- e_combined_sorted_binned
+      } else if (sse_bbin > sse) {
+        break_signal = TRUE
+        break
+      }
+
+      counter <- counter + 1
+    }
+    if (break_signal) {
       break
     }
-    
-    counter <- counter + 1
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned_cached,
@@ -112,37 +137,51 @@ optimize_overdispersion_parameter <- function(
     newctr <- 1
     sse <- b_and_sse[1, 2]
     b_choice <- 0
-
-    for (k in b_range) {
-      e_combined_sorted_binned <- nulldistrib(
-        w,
-        minN = minN,
-        p = p,
-        binSize = binSize,
-        distrib = "betabinomial",
-        b = k
+    
+    n_cores <- detectCores()
+    break_signal <- FALSE
+    for (i in seq(to = length(b_range), by = n_cores)) {
+      distribution_list <- mclapply(
+        b_range[i:(i + n_cores - 1)],
+        function(k) {
+          nulldistrib(
+            w,
+            minN = minN,
+            binSize = binSize,
+            distrib = "betabinomial",
+            b = k
+          )
+        }
       )
+      for (j in 1:n_cores) {
+        k <- b_range[[i + j - 1]]
+        e_combined_sorted_binned <- distribution_list[[j]]
 
-      ## minimize sse for betabinomials
-      sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
-      b_and_sse[(counter + 2), 1] <- k
-      b_and_sse[(counter + 2), 2] <- sse_bbin
-      labels[newctr] = paste(
-        "betabin,b=",
-        signif(k, 3),
-        "; SSE=",
-        signif(sse_bbin, 3)
-      )
-      
-      if (sse_bbin < sse) {
-        sse <- sse_bbin
-        b_choice <- k 
-      } else if (sse_bbin > sse) {
+        ## minimize sse for betabinomials
+        sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
+        b_and_sse[(counter + 2), 1] <- k
+        b_and_sse[(counter + 2), 2] <- sse_bbin
+        labels[newctr] = paste(
+          "betabin,b=",
+          signif(k, 3),
+          "; SSE=",
+          signif(sse_bbin, 3)
+        )
+        
+        if (sse_bbin < sse) {
+          sse <- sse_bbin
+          b_choice <- k 
+        } else if (sse_bbin > sse) {
+          break_signal <- TRUE
+          break
+        }
+        
+        counter <- counter + 1
+        newctr <- newctr + 1
+      }
+      if (break_signal) {
         break
       }
-      
-      counter <- counter + 1
-      newctr <- newctr + 1
     }
     flag <- flag - 1
     labels = labels[1:(newctr + 1),]
