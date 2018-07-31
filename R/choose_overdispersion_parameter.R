@@ -124,7 +124,7 @@ optimize_overdispersion_parameter <- function(
   binSize = 40,
   r_by = 0.1
 ) {
-  flag <- 3
+  flag <- 8
   if (b_choice >= 0.9) {
     flag <- 0
     newctr <- counter
