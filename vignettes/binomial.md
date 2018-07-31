@@ -106,6 +106,34 @@ plot(
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
 
+```r
+overdispersion_details <- choose_overdispersion_parameter(
+  w.grad,
+  w,
+  empirical,
+  sse
+)
+#> Error in matrix(c(b_choice, sse, rep(0, 48)), nrow = 50, ncol = 2, byrow = TRUE, : object 'sse' not found
+sse = sum((empirical - d.combined.sorted.binned[,2])^2)
+sse
+#> [1] 0.005153999
+par(new = TRUE)
+plot(
+  overdispersion_details[["e.combined.sorted.binned"]],
+  ylim = c(0, yuplimit),
+  pch = 16,
+  type = 'b',
+  col = colors[counter],
+  bty = 'n',
+  ylab = '',
+  xlab = '',
+  yaxt = 'n',
+  xaxt = 'n',
+  yaxs = "i"
+)
+#> Error in plot(overdispersion_details[["e.combined.sorted.binned"]], ylim = c(0, : object 'overdispersion_details' not found
+```
+
 Compute the sum of squared errors for the binomial distribution.
 
 
@@ -116,7 +144,6 @@ sse
 ```
 
 weighted betabinomial distribution
-
 very naive way of automating the process of finding b parameter automatically
 using least sum of squares of errors (between the density plots of empirical 
 and the expected distributions)
