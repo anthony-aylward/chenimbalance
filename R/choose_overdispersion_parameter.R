@@ -25,7 +25,7 @@ color_palette <- function() {
 #' @return Histogram of allelic ratios
 #' @export
 choose_overdispersion_parameter <- function(
-  w.grad,
+  w_grad,
   w,
   empirical,
   sse,
