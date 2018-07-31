@@ -40,8 +40,6 @@ choose_overdispersion_parameter <- function(
       distrib = "betabinomial",
       b = k
     )
-  #   par(new=TRUE)
-  #   plot(e.combined.sorted.binned,ylim=c(0,yuplimit),pch=16,type='b',col=colors[counter],bty='n',ylab='',xlab='',yaxt='n',xaxt='n',yaxs="i")
     
     sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
     b_and_sse[counter + 1, 1] <- k
@@ -69,4 +67,70 @@ choose_overdispersion_parameter <- function(
     sse = sse,
     labsls = labels
   )
+}
+
+optimize_overdispersion_parameter <- function(
+  w_grad,
+  b_and_sse,
+  b_chosen,
+  sse_chosen,
+  empirical,
+  counter,
+  minN = 6,
+  p = 0.5,
+  binSize = 40,
+  r_by = 0.1,
+  flag = 3
+) {
+  if (b_chosen >= 0.9) {
+    flag <- 0
+    newctr <- counter
+  }
+  while (flag) {
+    r_sta <- max(0, b_choice - r_by / 2)
+    r_end <- b_choice + r_by / 2
+    r_by <- r_by / 4
+    b_range <- seq(r_sta, r_end, by = r_by)
+    labels <- matrix(0, nrow = 50, ncol = 1)
+    newctr <- 1
+    sse <- b_and_sse[1, 2]
+    b_choice <- 0
+
+    for (k in b.range) {
+      e_combined_sorted_binned <- nulldistrib(
+        w,
+        minN = minN,
+        p = p,
+        binSize = binSize,
+        distrib = "betabinomial",
+        b = k
+      )
+
+      ## minimize sse for betabinomials
+      sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
+      b_and_sse[(counter + 2), 1] = k
+      b_and_sse[(counter + 2), 2] = sse_bbin
+      labels[newctr] = paste(
+        "betabin,b=",
+        signif(k, 3),
+        "; SSE=",
+        signif(sse_bbin, 3)
+      )
+      
+      if(sse_bbin < sse){
+        sse <- sse_bbin
+        b_choice <- k 
+      } else if (sse_bbin > sse) {
+        break
+      }
+      
+      counter <- counter + 1
+      newctr <- newctr + 1
+    }
+    labels = labels[1:(newctr + 1),]
+    if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
+      flag = 0 
+    }
+  }
+  list(e_combined_sorted_binned = e_combined_sorted_binned)
 }

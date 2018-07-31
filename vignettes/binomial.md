@@ -1,7 +1,7 @@
 ---
 title: "Weighted expected binomial model"
 author: "Anthony Aylward"
-date: "2018-07-30"
+date: "2018-07-31"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -38,13 +38,12 @@ head(data)
 
 ## Binomial distribution
 
+Compute the empirical allelic ratio distribution
+
 
 ```r
-# graded weights for SSE calculation
 binSize <- 40
 bins <- pretty(0:1, binSize)
-
-# empirical allelic Ratio
 minN <- 6
 maxN <- min(2500, max(data[["total"]]))
 apropor <- length(data[["total"]][data[["total"]] <= 2500]) / nrow(data)
@@ -59,56 +58,32 @@ empirical <- empirical_allelic_ratio(
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
-Plot the empirical and weighted expected binomial distributions
-
-Weighted expected binomial 
-
-Plot the binomial distribution for each n
-
-`dbinom(seq(0,500),n=500,p=0.5)` gives the pdf of 0-500, at `n=500`, `p=0.5` in
-binomial distrib
-
-weight each probability by the number of SNPs with n reads
-
-Compute the sum of squared errors for the binomial distribution.
-
-weighted betabinomial distribution
-very naive way of automating the process of finding b parameter automatically
-using least sum of squares of errors (between the density plots of empirical 
-and the expected distributions)
+Compute the weighted expected binomial distribution
 
 
 ```r
 w <- weight_by_empirical_counts(data[["total"]])
-d.combined.sorted.binned <- nulldistrib(
+d_combined_sorted_binned <- nulldistrib(
   w,
   minN = minN,
   binSize = binSize
 )
-yuplimit <- 0.15
-barplot(
-  empirical,
-  ylim = c(0, yuplimit),
-  ylab = "density", 
-  xlab = "allelicRatio",
-  names.arg = bins[2:length(bins)] - bins[[2]] / 2,
-  main = paste("n=", minN, "-", maxN)
-)
-par(new = TRUE)
-plot(
-  d.combined.sorted.binned,
-  ylim = c(0, yuplimit),
-  pch=16,
-  type='b',
-  col='red',
-  bty='n',
-  ylab='',
-  xlab='',
-  yaxt='n',
-  xaxt='n',
-  yaxs="i"
-)
-sse <- sum((empirical - d.combined.sorted.binned[,2])^2)
+```
+
+Compute the sum of squared errors for the empirical distribution vs the 
+weighted expected binomial distribution.
+
+
+```r
+sse <- sum((empirical - d_combined_sorted_binned[,2])^2)
+sse
+#> [1] 0.005153999
+```
+
+Choose the overdispersion parameter for the beta-binomial distribution
+
+
+```r
 w_grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
 overdispersion_details <- choose_overdispersion_parameter(
   w_grad,
@@ -116,21 +91,52 @@ overdispersion_details <- choose_overdispersion_parameter(
   empirical,
   sse
 )
-par(new = TRUE)
-colors <- color_palette()
-plot(
-  overdispersion_details[["e_combined_sorted_binned"]],
-  ylim = c(0, yuplimit),
-  pch = 16,
-  type = 'b',
-  col = colors[[2]],
-  bty = 'n',
-  ylab = '',
-  xlab = '',
-  yaxt = 'n',
-  xaxt = 'n',
-  yaxs = "i"
-)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+Generate a plot of the weighted expected binomial and weighted expected 
+beta-binomial distributions overlaid on the empirical distribution
+
+
+```r
+plot_distributions(
+  minN,
+  maxN,
+  bins,
+  empirical,
+  d_combined_sorted_binned,
+  overdispersion_details[["e_combined_sorted_binned"]],
+  yuplimit = 0.15
+)
+#> Error in plot_distributions(minN, maxN, bins, empirical, d_combined_sorted_binned, : could not find function "plot_distributions"
+```
+
+`overdispersion_details` is a list whose elements include the chosen value of 
+`b` and the sum of squared errors.
+
+
+```r
+paste(
+  "b.chosen =",
+  overdispersion_details[["b_choice"]],
+  ", SSE.chosen =",
+  overdispersion_details[["sse"]]
+)
+#> [1] "b.chosen = 0 , SSE.chosen = 0.00453646491290852"
+```
+
+Optimise the overdispersion parameter
+
+
+```r
+optimized_overdispersion_details <- optimize_overdispersion_parameter(
+  w_grad,
+  overdispersion_details[["b_and_sse"]],
+  overdispersion_details[["b_choice"]],
+  overdispersion_details[["sse"]],
+  empirical,
+  counter,
+  minN = minN,
+  binSize = binSize
+)
+#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : could not find function "optimize_overdispersion_parameter"
+```
