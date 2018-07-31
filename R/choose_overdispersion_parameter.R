@@ -75,8 +75,7 @@ choose_overdispersion_parameter <- function(
 #'
 #' @param w_grad w_grad
 #' @param b_and_sse b_and_sse
-#' @param b_chosen b_chosen
-#' @param sse_chosen sse_chosen
+#' @param b_choice b_choice
 #' @param empirical empirical
 #' @param counter counter
 #' @param minN minimum coverage level
@@ -88,8 +87,7 @@ choose_overdispersion_parameter <- function(
 optimize_overdispersion_parameter <- function(
   w_grad,
   b_and_sse,
-  b_chosen,
-  sse_chosen,
+  b_choice,
   empirical,
   counter,
   minN = 6,
@@ -98,7 +96,7 @@ optimize_overdispersion_parameter <- function(
   r_by = 0.1
 ) {
   flag = 3
-  if (b_chosen >= 0.9) {
+  if (b_choice >= 0.9) {
     flag <- 0
     newctr <- counter
   }
