@@ -124,8 +124,8 @@ optimize_overdispersion_parameter <- function(
 
       ## minimize sse for betabinomials
       sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
-      b_and_sse[(counter + 2), 1] = k
-      b_and_sse[(counter + 2), 2] = sse_bbin
+      b_and_sse[(counter + 2), 1] <- k
+      b_and_sse[(counter + 2), 2] <- sse_bbin
       labels[newctr] = paste(
         "betabin,b=",
         signif(k, 3),
