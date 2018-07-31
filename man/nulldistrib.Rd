@@ -4,8 +4,8 @@
 \alias{nulldistrib}
 \title{Weighted beta/binomial distribution}
 \usage{
-nulldistrib(w, minN = 6, p = 0.5, binSize = 40,
-  distrib = "binomial", b = 0)
+nulldistrib(w, minN = 6, p = 0.5, binSize = 40, distrib = "binomial",
+  b = 0)
 }
 \arguments{
 \item{w}{Data frame or matrix giving}
@@ -25,7 +25,4 @@ Weighted beta/binomial distribution
 col1=allelicRatio (based on binomial n=6, ar=0,1/6,2/6...)
 col2=corresponding weighted value in binomial distribution, i.e.
 pdf(n, k, p) * (num of empirical SNPs at n counts)
-}
-\seealso{
-\code{\link{weighted_expected_binomial}}
 }
