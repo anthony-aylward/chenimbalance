@@ -26,6 +26,3 @@ col1=allelicRatio (based on binomial n=6, ar=0,1/6,2/6...)
 col2=corresponding weighted value in binomial distribution, i.e.
 pdf(n, k, p) * (num of empirical SNPs at n counts)
 }
-\seealso{
-\code{\link{weighted_expected_binomial}}
-}

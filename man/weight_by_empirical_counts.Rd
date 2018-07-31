@@ -15,9 +15,3 @@ A one-column matrix of weights for each coverage level
 \description{
 Weight by empirical counts
 }
-\seealso{
-\code{\link{weighted_expected_binomial}}
-
-\code{link{weighted_expected_binomial}},
-  \code{link{choose_overdispersion_parameter}}
-}

@@ -11,7 +11,7 @@
 
 # Functions ====================================================================
 
-#' Compute a beta-binomial null distribution
+#' @title Compute a beta-binomial null distribution
 #'
 #' @param k The overdispersion parameter
 #' @return the beta-binomial null distribution
