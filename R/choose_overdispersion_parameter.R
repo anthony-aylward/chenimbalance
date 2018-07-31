@@ -193,6 +193,8 @@ optimize_overdispersion_parameter <- function(
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned,
+    b_choice = b_choice,
+    sse = sse,
     counter = counter
   )
 }

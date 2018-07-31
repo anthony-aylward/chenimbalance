@@ -136,3 +136,12 @@ plot_distributions(
   yuplimit = 0.15
 )
 ```
+
+Check the optimized value
+
+```{r}
+list(
+  b = optimized_overdispersion_details[["b_choice"]],
+  sse = optimized_overdispersion_details[["sse"]]
+)
+```
