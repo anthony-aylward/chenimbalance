@@ -46,7 +46,7 @@ choose_overdispersion_parameter <- function(
   break_signal <- FALSE
   for (i in seq(to = length(b_range), by = n_cores)) {
     distribution_list <- mclapply(
-      b_range[i:(i + n_cores - 1)],
+      b_range[i:max(length(b_range), i + n_cores - 1)],
       function(k) {
         nulldistrib(
           w,
@@ -143,7 +143,7 @@ optimize_overdispersion_parameter <- function(
     break_signal <- FALSE
     for (i in seq(to = length(b_range), by = n_cores)) {
       distribution_list <- mclapply(
-        b_range[i:(i + n_cores - 1)],
+        b_range[i:max(length(b_range), i + n_cores - 1)],
         function(k) {
           nulldistrib(
             w,
