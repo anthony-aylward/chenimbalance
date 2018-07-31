@@ -70,6 +70,13 @@ binomial distrib
 
 weight each probability by the number of SNPs with n reads
 
+Compute the sum of squared errors for the binomial distribution.
+
+weighted betabinomial distribution
+very naive way of automating the process of finding b parameter automatically
+using least sum of squares of errors (between the density plots of empirical 
+and the expected distributions)
+
 
 ```r
 w <- weight_by_empirical_counts(data[["total"]])
@@ -127,10 +134,3 @@ plot(
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
-
-Compute the sum of squared errors for the binomial distribution.
-
-weighted betabinomial distribution
-very naive way of automating the process of finding b parameter automatically
-using least sum of squares of errors (between the density plots of empirical 
-and the expected distributions)
