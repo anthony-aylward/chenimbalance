@@ -43,7 +43,6 @@ head(data)
 # graded weights for SSE calculation
 binSize <- 40
 bins <- pretty(0:1, binSize)
-w.grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
 
 # empirical allelic Ratio
 minN <- 6
@@ -117,7 +116,7 @@ plot(
   ylim = c(0, yuplimit),
   pch = 16,
   type = 'b',
-  col = colors[[1]],
+  col = colors[[2]],
   bty = 'n',
   ylab = '',
   xlab = '',
