@@ -18,7 +18,7 @@ choose_overdispersion_parameter <- function(
   minN = 6,
   binSize = 40,
   b_choice = 0,
-  r_sta = 0,
+  r_sta = 0.1,
   r_end = 0.99,
   r_by  = 0.1
 ) {
@@ -65,7 +65,7 @@ choose_overdispersion_parameter <- function(
     b_and_sse = b_and_sse,
     b_choice = b_choice,
     sse = sse,
-    labsls = labels,
+    labels = labels,
     counter = counter
   )
 }
@@ -102,8 +102,8 @@ optimize_overdispersion_parameter <- function(
     newctr <- counter
   }
   while (flag) {
-    r_sta <- max(0, b_choice - r_by / 2)
-    r_end <- b_choice + r_by / 2
+    r_sta <- max(0, b_choice - r_by)
+    r_end <- b_choice + r_by
     r_by <- r_by / 4
     b_range <- seq(r_sta, r_end, by = r_by)
     labels <- matrix(0, nrow = 50, ncol = 1)
