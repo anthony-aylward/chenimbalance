@@ -2,6 +2,8 @@
 
 export(bin_according_to_empirical_distribution)
 export(change_counts_into_density)
+export(choose_overdispersion_parameter)
+export(color_palette)
 export(empirical_allelic_ratio)
 export(graded_weights_for_sse_calculation)
 export(nulldistrib)
