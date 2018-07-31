@@ -54,6 +54,7 @@ choose_overdispersion_parameter <- function(
     if (sse_bbin < sse || k == r_sta) {
       b_choice <- k
       sse <- sse_bbin
+      e_combined_sorted_binned_cached <- e_combined_sorted_binned
     } else if (sse_bbin > sse) {
       break
     }
@@ -61,7 +62,7 @@ choose_overdispersion_parameter <- function(
     counter <- counter + 1
   }
   list(
-    e_combined_sorted_binned = e_combined_sorted_binned,
+    e_combined_sorted_binned = e_combined_sorted_binned_cached,
     b_and_sse = b_and_sse,
     b_choice = b_choice,
     sse = sse,

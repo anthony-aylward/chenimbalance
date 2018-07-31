@@ -119,12 +119,12 @@ plot_distributions(
 
 ```r
 paste(
-  "b.chosen =",
+  "b_chosen =",
   overdispersion_details[["b_choice"]],
-  ", SSE.chosen =",
+  ", SSE_chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b.chosen = 0.1 , SSE.chosen = 0.00650588067002628"
+#> [1] "b_chosen = 0.1 , SSE_chosen = 0.00650588067002628"
 ```
 
 Optimise the overdispersion parameter
