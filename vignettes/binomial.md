@@ -107,8 +107,9 @@ plot_distributions(
   overdispersion_details[["e_combined_sorted_binned"]],
   yuplimit = 0.15
 )
-#> Error in plot_distributions(minN, maxN, bins, empirical, d_combined_sorted_binned, : could not find function "plot_distributions"
 ```
+
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
 
 `overdispersion_details` is a list whose elements include the chosen value of 
 `b` and the sum of squared errors.
@@ -138,7 +139,7 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   minN = minN,
   binSize = binSize
 )
-#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : object 'b_choice' not found
+#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : object 'b.range' not found
 plot_distributions(
   minN,
   maxN,
@@ -148,5 +149,7 @@ plot_distributions(
   optimized_overdispersion_details[["e_combined_sorted_binned"]],
   yuplimit = 0.15
 )
-#> Error in plot_distributions(minN, maxN, bins, empirical, d_combined_sorted_binned, : could not find function "plot_distributions"
+#> Error in plot(e_combined_sorted_binned, ylim = c(0, yuplimit), pch = 16, : object 'optimized_overdispersion_details' not found
 ```
+
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)

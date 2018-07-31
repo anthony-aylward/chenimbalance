@@ -11,6 +11,7 @@
 #' @param d_combined_sorted_binned The weighted expected binomial distribution
 #' @param e_combined_sorted_binned The weighted expected beta-binomial
 #'   distribution
+#' @export
 plot_distributions <- function(
   minN,
   maxN,

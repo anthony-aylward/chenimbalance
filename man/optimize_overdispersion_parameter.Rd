@@ -4,17 +4,15 @@
 \alias{optimize_overdispersion_parameter}
 \title{Optimize the overdispersion parameter}
 \usage{
-optimize_overdispersion_parameter(w_grad, b_and_sse, b_chosen, sse_chosen,
-  empirical, counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1)
+optimize_overdispersion_parameter(w_grad, b_and_sse, b_choice, empirical,
+  counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1)
 }
 \arguments{
 \item{w_grad}{w_grad}
 
 \item{b_and_sse}{b_and_sse}
 
-\item{b_chosen}{b_chosen}
-
-\item{sse_chosen}{sse_chosen}
+\item{b_choice}{b_choice}
 
 \item{empirical}{empirical}
 
