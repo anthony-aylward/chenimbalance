@@ -69,6 +69,22 @@ choose_overdispersion_parameter <- function(
   )
 }
 
+#' @title Optimize the overdispersion parameter
+#'
+#' @description Minimize sse for betabinomials
+#'
+#' @param w_grad w_grad
+#' @param b_and_sse b_and_sse
+#' @param b_chosen b_chosen
+#' @param sse_chosen sse_chosen
+#' @param empirical empirical
+#' @param counter counter
+#' @param minN minimum coverage level
+#' @param p binomial probability of success parameter
+#' @param binSize approximate number of bins
+#' @param r_by r_by
+#' @return list
+#' @export
 optimize_overdispersion_parameter <- function(
   w_grad,
   b_and_sse,
@@ -79,9 +95,9 @@ optimize_overdispersion_parameter <- function(
   minN = 6,
   p = 0.5,
   binSize = 40,
-  r_by = 0.1,
-  flag = 3
+  r_by = 0.1
 ) {
+  flag = 3
   if (b_chosen >= 0.9) {
     flag <- 0
     newctr <- counter

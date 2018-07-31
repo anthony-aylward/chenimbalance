@@ -138,5 +138,15 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   minN = minN,
   binSize = binSize
 )
-#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : could not find function "optimize_overdispersion_parameter"
+#> Error in optimize_overdispersion_parameter(w_grad, overdispersion_details[["b_and_sse"]], : object 'b_choice' not found
+plot_distributions(
+  minN,
+  maxN,
+  bins,
+  empirical,
+  d_combined_sorted_binned,
+  optimized_overdispersion_details[["e_combined_sorted_binned"]],
+  yuplimit = 0.15
+)
+#> Error in plot_distributions(minN, maxN, bins, empirical, d_combined_sorted_binned, : could not find function "plot_distributions"
 ```
