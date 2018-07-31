@@ -142,7 +142,6 @@ optimize_overdispersion_parameter <- function(
       counter <- counter + 1
       newctr <- newctr + 1
     }
-    flag <- flag - 1
     labels = labels[1:(newctr + 1),]
     if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
       flag <- 0 
