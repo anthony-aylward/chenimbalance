@@ -113,7 +113,7 @@ overdispersion_details <- choose_overdispersion_parameter(
 par(new = TRUE)
 colors <- color_palette()
 plot(
-  overdispersion_details[["e.combined.sorted.binned"]],
+  overdispersion_details[["e_combined_sorted_binned"]],
   ylim = c(0, yuplimit),
   pch = 16,
   type = 'b',
@@ -125,9 +125,6 @@ plot(
   xaxt = 'n',
   yaxs = "i"
 )
-#> Warning in min(x): no non-missing arguments to min; returning Inf
-#> Warning in max(x): no non-missing arguments to max; returning -Inf
-#> Error in plot.window(...): need finite 'xlim' values
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
