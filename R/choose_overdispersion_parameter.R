@@ -32,7 +32,6 @@ choose_overdispersion_parameter <- function(
   )
   labels <- matrix(0, nrow = 50, ncol = 1)
   b_range <- seq(r_sta, r_end, by = r_by)
-  
   for (k in b_range) {
     e_combined_sorted_binned <- nulldistrib(
       w,

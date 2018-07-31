@@ -135,7 +135,7 @@ paste(
 #> [1] "b_chosen = 0.1 , SSE_chosen = 0.00650588067002628"
 ```
 
-Optimise the overdispersion parameter
+Optimize the overdispersion parameter
 
 
 ```r
