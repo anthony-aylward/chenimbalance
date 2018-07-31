@@ -116,23 +116,23 @@ paste(
 Optimize the overdispersion parameter
 
 ```{r}
-#optimized_overdispersion_details <- optimize_overdispersion_parameter(
-#  w_grad,
-#  overdispersion_details[["b_and_sse"]],
-#  overdispersion_details[["b_choice"]],
-#  overdispersion_details[["sse"]],
-#  empirical,
-#  overdispersion_details[["counter"]],
-#  minN = minN,
-#  binSize = binSize
-#)
-#plot_distributions(
-#  minN,
-#  maxN,
-#  bins,
-#  empirical,
-#  d_combined_sorted_binned,
-#  optimized_overdispersion_details[["e_combined_sorted_binned"]],
-#  yuplimit = 0.15
-#)
+optimized_overdispersion_details <- optimize_overdispersion_parameter(
+  w_grad,
+  overdispersion_details[["b_and_sse"]],
+  overdispersion_details[["b_choice"]],
+  overdispersion_details[["sse"]],
+  empirical,
+  overdispersion_details[["counter"]],
+  minN = minN,
+  binSize = binSize
+)
+plot_distributions(
+  minN,
+  maxN,
+  bins,
+  empirical,
+  d_combined_sorted_binned,
+  optimized_overdispersion_details[["e_combined_sorted_binned"]],
+  yuplimit = 0.15
+)
 ```
