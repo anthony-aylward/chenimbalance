@@ -8,8 +8,6 @@
 #' @return A one-column matrix of weights for each coverage level
 #' @seealso \code{\link{weighted_expected_binomial}}
 #' @export
-#' @seealso \code{link{weighted_expected_binomial}},
-#'   \code{link{choose_overdispersion_parameter}}
 weight_by_empirical_counts <- function(total) {
   t <- as.data.frame(table(total), stringsAsFactors = FALSE)
   w <- matrix(0, max(total), 1)

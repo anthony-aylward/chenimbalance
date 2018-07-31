@@ -1,5 +1,5 @@
 #===============================================================================
-# weighted_expected_binomial.R
+# nulldistrib.R
 #===============================================================================
 
 # Imports ======================================================================
@@ -145,7 +145,6 @@ parametric_probability_mass <- function(
 #' @param w Data frame or matrix giving 
 #' @return The weighted null beta/binomial probability mass function
 #' @export
-#' @seealso \code{\link{weighted_expected_binomial}}
 nulldistrib <- function(
   w,
   minN = 6,
