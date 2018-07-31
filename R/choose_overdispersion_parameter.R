@@ -36,7 +36,6 @@ choose_overdispersion_parameter <- function(
   r_end = 0.99,
   r_by  = 0.1
 ) {
-  colors <- color_palette()
   counter <- 1
   b_and_sse = matrix(
     c(b_choice, sse, rep(0, 48)),

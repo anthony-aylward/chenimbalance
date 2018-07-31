@@ -102,26 +102,22 @@ plot(
   xaxt='n',
   yaxs="i"
 )
-```
-
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
-
-```r
-sse = sum((empirical - d.combined.sorted.binned[,2])^2)
+sse <- sum((empirical - d.combined.sorted.binned[,2])^2)
+w_grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
 overdispersion_details <- choose_overdispersion_parameter(
-  w.grad,
+  w_grad,
   w,
   empirical,
   sse
 )
-#> Error in choose_overdispersion_parameter(w.grad, w, empirical, sse): object 'w_grad' not found
 par(new = TRUE)
+colors <- color_palette()
 plot(
   overdispersion_details[["e.combined.sorted.binned"]],
   ylim = c(0, yuplimit),
   pch = 16,
   type = 'b',
-  col = colors[counter],
+  col = colors[[1]]],
   bty = 'n',
   ylab = '',
   xlab = '',
@@ -129,7 +125,10 @@ plot(
   xaxt = 'n',
   yaxs = "i"
 )
-#> Error in plot(overdispersion_details[["e.combined.sorted.binned"]], ylim = c(0, : object 'overdispersion_details' not found
+#> Error: <text>:45:20: unexpected ']'
+#> 44:   type = 'b',
+#> 45:   col = colors[[1]]]
+#>                        ^
 ```
 
 Compute the sum of squared errors for the binomial distribution.
@@ -154,7 +153,6 @@ overdispersion_details <- choose_overdispersion_parameter(
   empirical,
   sse
 )
-#> Error in choose_overdispersion_parameter(w.grad, w, empirical, sse): object 'w_grad' not found
 par(new = TRUE)
 #> Warning in par(new = TRUE): calling par(new=TRUE) with no plot
 plot(
@@ -170,5 +168,9 @@ plot(
   xaxt = 'n',
   yaxs = "i"
 )
-#> Error in plot(overdispersion_details[["e.combined.sorted.binned"]], ylim = c(0, : object 'overdispersion_details' not found
+#> Warning in min(x): no non-missing arguments to min; returning Inf
+#> Warning in max(x): no non-missing arguments to max; returning -Inf
+#> Error in plot.window(...): need finite 'xlim' values
 ```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
