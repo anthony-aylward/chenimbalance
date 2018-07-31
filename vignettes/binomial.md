@@ -93,6 +93,14 @@ overdispersion_details <- choose_overdispersion_parameter(
   empirical,
   sse
 )
+head(overdispersion_details[["b_and_sse"]])
+#>        b         sse
+#> [1,] 0.0 0.005153999
+#> [2,] 0.2 0.013358063
+#> [3,] 0.3 0.018524485
+#> [4,] 0.0 0.000000000
+#> [5,] 0.0 0.000000000
+#> [6,] 0.0 0.000000000
 ```
 
 Generate a plot of the weighted expected binomial and weighted expected 
@@ -124,7 +132,7 @@ paste(
   ", SSE_chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b_chosen = 0.1 , SSE_chosen = 0.00650588067002628"
+#> [1] "b_chosen = 0.2 , SSE_chosen = 0.0133580633504733"
 ```
 
 Optimise the overdispersion parameter
