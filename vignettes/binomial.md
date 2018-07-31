@@ -132,8 +132,8 @@ overdispersion_details <- choose_overdispersion_parameter(
 par(new = TRUE)
 #> Warning in par(new = TRUE): calling par(new=TRUE) with no plot
 plot(
-  e.combined.sorted.binned,
-  ylim = c(0,yuplimit),
+  overdispersion_details[["e.combined.sorted.binned"]],
+  ylim = c(0, yuplimit),
   pch = 16,
   type = 'b',
   col = colors[counter],
@@ -144,5 +144,5 @@ plot(
   xaxt = 'n',
   yaxs = "i"
 )
-#> Error in plot(e.combined.sorted.binned, ylim = c(0, yuplimit), pch = 16, : object 'e.combined.sorted.binned' not found
+#> Error in plot(overdispersion_details[["e.combined.sorted.binned"]], ylim = c(0, : object 'overdispersion_details' not found
 ```
