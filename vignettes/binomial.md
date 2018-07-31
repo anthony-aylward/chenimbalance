@@ -124,7 +124,7 @@ paste(
   ", SSE.chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b.chosen = 0 , SSE.chosen = 0.0051539989258303"
+#> [1] "b.chosen = 0.1 , SSE.chosen = 0.00650588067002628"
 ```
 
 Optimise the overdispersion parameter

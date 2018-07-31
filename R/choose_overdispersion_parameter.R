@@ -51,7 +51,7 @@ choose_overdispersion_parameter <- function(
       signif(sse_bbin, 2)
     )
     
-    if (sse_bbin < sse || b_choice == r_sta) {
+    if (sse_bbin < sse || k == r_sta) {
       b_choice <- k
       sse <- sse_bbin
     } else if (sse_bbin > sse) {
@@ -133,7 +133,7 @@ optimize_overdispersion_parameter <- function(
         signif(sse_bbin, 3)
       )
       
-      if(sse_bbin < sse){
+      if (sse_bbin < sse) {
         sse <- sse_bbin
         b_choice <- k 
       } else if (sse_bbin > sse) {
