@@ -94,9 +94,9 @@ overdispersion_details <- choose_overdispersion_parameter(
   sse
 )
 #> Warning in mclapply(b_range[i:(i + n_cores - 1)], function(k) {: scheduled
-#> cores 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24,
-#> 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 42, 46, 47, 41, 43,
-#> 44, 45, 48 encountered errors in user code, all values of the jobs will be
+#> cores 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20,
+#> 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 40, 45, 37, 47, 38, 46, 44, 41, 42,
+#> 48, 39, 43 encountered errors in user code, all values of the jobs will be
 #> affected
 head(overdispersion_details[["b_and_sse"]])
 #>        b         sse
