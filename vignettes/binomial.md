@@ -124,34 +124,30 @@ paste(
   ", SSE.chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b.chosen = 0 , SSE.chosen = 0.00453646491290852"
+#> [1] "b.chosen = 0 , SSE.chosen = 0.0051539989258303"
 ```
 
 Optimise the overdispersion parameter
 
 
 ```r
-optimized_overdispersion_details <- optimize_overdispersion_parameter(
-  w_grad,
-  overdispersion_details[["b_and_sse"]],
-  overdispersion_details[["b_choice"]],
-  overdispersion_details[["sse"]],
-  empirical,
-  overdispersion_details[["counter"]],
-  minN = minN,
-  binSize = binSize
-)
-#> Error in if (sse_bbin < sse) {: missing value where TRUE/FALSE needed
-plot_distributions(
-  minN,
-  maxN,
-  bins,
-  empirical,
-  d_combined_sorted_binned,
-  optimized_overdispersion_details[["e_combined_sorted_binned"]],
-  yuplimit = 0.15
-)
-#> Error in plot(e_combined_sorted_binned, ylim = c(0, yuplimit), pch = 16, : object 'optimized_overdispersion_details' not found
+#optimized_overdispersion_details <- optimize_overdispersion_parameter(
+#  w_grad,
+#  overdispersion_details[["b_and_sse"]],
+#  overdispersion_details[["b_choice"]],
+#  overdispersion_details[["sse"]],
+#  empirical,
+#  overdispersion_details[["counter"]],
+#  minN = minN,
+#  binSize = binSize
+#)
+#plot_distributions(
+#  minN,
+#  maxN,
+#  bins,
+#  empirical,
+#  d_combined_sorted_binned,
+#  optimized_overdispersion_details[["e_combined_sorted_binned"]],
+#  yuplimit = 0.15
+#)
 ```
-
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)

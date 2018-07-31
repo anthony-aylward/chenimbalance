@@ -89,6 +89,7 @@ optimize_overdispersion_parameter <- function(
   w_grad,
   b_and_sse,
   b_choice,
+  sse,
   empirical,
   counter,
   minN = 6,
@@ -104,7 +105,7 @@ optimize_overdispersion_parameter <- function(
   while (flag) {
     r_sta <- max(0, b_choice - r_by)
     r_end <- b_choice + r_by
-    r_by <- r_by / 4
+    r_by <- r_by / 2
     b_range <- seq(r_sta, r_end, by = r_by)
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
@@ -147,5 +148,8 @@ optimize_overdispersion_parameter <- function(
       flag <- 0 
     }
   }
-  list(e_combined_sorted_binned = e_combined_sorted_binned)
+  list(
+    e_combined_sorted_binned = e_combined_sorted_binned,
+    counter = counter
+  )
 }
