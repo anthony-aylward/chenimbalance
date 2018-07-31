@@ -57,7 +57,7 @@ choose_overdispersion_parameter <- function(
         )
       }
     )
-    for (j in 1:n_cores) {
+    for (j in 1:max(n_cores, length(b_range) - i)) {
       k <- b_range[[i + j - 1]]
       e_combined_sorted_binned <- distribution_list[[j]]
       
@@ -153,7 +153,7 @@ optimize_overdispersion_parameter <- function(
           )
         }
       )
-      for (j in 1:n_cores) {
+      for (j in 1:max(n_cores, length(b_range) - i)) {
         k <- b_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
 
