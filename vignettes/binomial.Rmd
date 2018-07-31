@@ -83,6 +83,7 @@ overdispersion_details <- choose_overdispersion_parameter(
   empirical,
   sse
 )
+head(overdispersion_details[["b_and_sse"]])
 ```
 
 Generate a plot of the weighted expected binomial and weighted expected 
