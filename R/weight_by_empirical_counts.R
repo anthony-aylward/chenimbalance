@@ -6,7 +6,6 @@
 #'
 #' @param total Vector containing coverage per variant
 #' @return A one-column matrix of weights for each coverage level
-#' @seealso \code{\link{weighted_expected_binomial}}
 #' @export
 weight_by_empirical_counts <- function(total) {
   t <- as.data.frame(table(total), stringsAsFactors = FALSE)
