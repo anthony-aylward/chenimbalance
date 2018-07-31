@@ -141,7 +141,7 @@ optimized_overdispersion_details <- optimize_overdispersion_parameter(
   minN = minN,
   binSize = binSize
 )
-#> Error in if (any(ok3)) {: missing value where TRUE/FALSE needed
+#> Error in if (sse_bbin < sse) {: missing value where TRUE/FALSE needed
 plot_distributions(
   minN,
   maxN,

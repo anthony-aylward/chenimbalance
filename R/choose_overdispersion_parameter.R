@@ -96,7 +96,7 @@ optimize_overdispersion_parameter <- function(
   binSize = 40,
   r_by = 0.1
 ) {
-  flag = 3
+  flag <- 3
   if (b_choice >= 0.9) {
     flag <- 0
     newctr <- counter
@@ -142,9 +142,10 @@ optimize_overdispersion_parameter <- function(
       counter <- counter + 1
       newctr <- newctr + 1
     }
+    flag <- flag - 1
     labels = labels[1:(newctr + 1),]
     if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
-      flag = 0 
+      flag <- 0 
     }
   }
   list(e_combined_sorted_binned = e_combined_sorted_binned)
