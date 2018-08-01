@@ -1,7 +1,7 @@
 ---
 title: "Weighted expected binomial model"
 author: "Anthony Aylward"
-date: "2018-07-31"
+date: "2018-08-01"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -46,7 +46,6 @@ binSize <- 40
 bins <- pretty(0:1, binSize)
 minN <- 6
 maxN <- min(2500, max(data[["total"]]))
-apropor <- length(data[["total"]][data[["total"]] <= 2500]) / nrow(data)
 empirical <- empirical_allelic_ratio(
   data,
   bins,
@@ -171,8 +170,39 @@ list(
   sse = optimized_overdispersion_details[["sse"]]
 )
 #> $b
-#> [1] 0.01875
+#> [1] 0.025
 #> 
 #> $sse
-#> [1] 0.0004222515
+#> [1] 0.0005600451
+```
+
+Plot the parameter search space
+
+
+```r
+b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2,]
+plot(
+  b_and_sse[order(b_and_sse[,1]),],
+  type = "b",
+  pch = 16,
+  xlim = c(min(b_and_sse[,1]), max(b_and_sse[,1])),
+  ylim = c(min(b_and_sse[,2]), max(b_and_sse[,2]))
+)
+par(new = TRUE)
+plot(
+  optimized_overdispersion_details[["b_choice"]],
+  optimized_overdispersion_details[["sse"]],
+  bty = "n",
+  ylab = "",
+  xlab = "",
+  yaxt = "n",
+  xaxt = "n",
+  col = "red",
+  pch = 8,
+  xlim = c(min(b_and_sse[,1]), max(b_and_sse[,1])),
+  ylim = c(min(b_and_sse[,2]), max(b_and_sse[,2]))
+)
+#> Error: <text>:1:76: unexpected ','
+#> 1: b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2,
+#>                                                                                ^
 ```
