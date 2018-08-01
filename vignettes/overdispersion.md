@@ -170,10 +170,10 @@ list(
   sse = optimized_overdispersion_details[["sse"]]
 )
 #> $b
-#> [1] 0.025
+#> [1] 0.01855469
 #> 
 #> $sse
-#> [1] 0.0005600451
+#> [1] 0.0004221577
 ```
 
 Plot the parameter search space
