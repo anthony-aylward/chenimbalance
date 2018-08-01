@@ -4,7 +4,8 @@
 \alias{parametric_probability_mass}
 \title{A parametric probability mass value}
 \usage{
-parametric_probability_mass(k, i, distrib = "binomial", p = 0.5, b = 0)
+parametric_probability_mass(k, i, distrib = "binomial", p = 0.5,
+  b = 0)
 }
 \arguments{
 \item{k}{k}
