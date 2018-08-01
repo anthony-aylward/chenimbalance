@@ -180,7 +180,10 @@ Plot the parameter search space
 
 
 ```r
-b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2,]
+b_and_sse <- (
+  optimized_overdispersion_details[["b_and_sse"]]
+  [1:(optimized_overdispersion_details[["counter"]] + 2),]
+)
 plot(
   b_and_sse[order(b_and_sse[,1]),],
   type = "b",
@@ -202,7 +205,6 @@ plot(
   xlim = c(min(b_and_sse[,1]), max(b_and_sse[,1])),
   ylim = c(min(b_and_sse[,2]), max(b_and_sse[,2]))
 )
-#> Error: <text>:1:76: unexpected ','
-#> 1: b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2,
-#>                                                                                ^
 ```
+
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
