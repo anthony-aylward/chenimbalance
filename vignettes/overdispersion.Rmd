@@ -148,7 +148,7 @@ list(
 Plot the parameter search space
 
 ```{r}
-b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2,]
+b_and_sse <- b_and_sse[1:(optimized_overdispersion_details[["counter"]] + 2),]
 plot(
   b_and_sse[order(b_and_sse[,1]),],
   type = "b",
