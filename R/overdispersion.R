@@ -124,9 +124,9 @@ optimize_overdispersion_parameter <- function(
   binSize = 40,
   r_by = 0.1
 ) {
-  flag <- 16
+  flag <- TRUE
   if (b_choice >= 0.9) {
-    flag <- 0
+    flag <- FALSE
     newctr <- counter
   }
   while (flag) {
@@ -185,10 +185,9 @@ optimize_overdispersion_parameter <- function(
         break
       }
     }
-    flag <- flag - 1
     labels = labels[1:(newctr + 1),]
     if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
-      flag <- 0 
+      flag <- FALSE
     }
   }
   list(
