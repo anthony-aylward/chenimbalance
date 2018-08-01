@@ -4,8 +4,8 @@
 \alias{optimize_overdispersion_parameter}
 \title{Optimize the overdispersion parameter}
 \usage{
-optimize_overdispersion_parameter(w_grad, b_and_sse, b_choice, sse, empirical,
-  counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1)
+optimize_overdispersion_parameter(w_grad, b_and_sse, b_choice, sse,
+  empirical, counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1)
 }
 \arguments{
 \item{w_grad}{w_grad}
