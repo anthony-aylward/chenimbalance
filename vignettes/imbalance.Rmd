@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
+library(chenimbalance)
 FDR.thresh <- 0.05
 p <- 0.5
 cACGT <- data.frame(cA = accb$cA, cC = accb$cC, cG = accb$cG, cT = accb$cT)
