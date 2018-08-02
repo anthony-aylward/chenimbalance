@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Prepare the data.
 
-```{r}
+```{r overdisp_prepare_data}
 library(chenimbalance)
 total_reads <- rowSums(accb[, c("cA", "cC", "cG", "cT")])
 data <- data.frame(
@@ -30,6 +30,7 @@ data <- data.frame(
     }
   )
 )
+data <- data[1:2000,]
 head(data)
 ```
 
