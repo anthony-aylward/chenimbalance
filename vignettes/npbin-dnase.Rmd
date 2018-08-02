@@ -1,5 +1,5 @@
 ---
-title: "Estimate overdispersion on the ctcf dataset from the NPBin paper"
+title: "Estimate overdispersion on the dnase dataset from the NPBin paper"
 author: "Anthony Aylward"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -24,10 +24,10 @@ package.
 ```{r}
 library(chenimbalance)
 library(npbin)
-total_reads <- ctcf[["m"]]
+total_reads <- dnase[["m"]]
 data <- data.frame(
   total = total_reads,
-  allelicRatio =  ctcf[["xm"]] / ctcf[["m"]]
+  allelicRatio =  dnase[["xm"]] / dnase[["m"]]
 )
 data <- data[total_reads >= 5,]
 data <- data[1:2000,]
