@@ -1,5 +1,5 @@
 ---
-title: "Estimate overdispersion on the ctcf dataset from the NPBin paper"
+title: "Estimate overdispersion on the dnase dataset from the NPBin paper"
 author: "Anthony Aylward"
 date: "2018-08-02"
 output: rmarkdown::html_vignette
@@ -20,21 +20,21 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
-total_reads <- ctcf[["m"]]
+total_reads <- dnase[["m"]]
 data <- data.frame(
   total = total_reads,
-  allelicRatio =  ctcf[["xm"]] / ctcf[["m"]]
+  allelicRatio =  dnase[["xm"]] / dnase[["m"]]
 )
 data <- data[total_reads >= 5,]
 data <- data[1:2000,]
 head(data)
 #>   total allelicRatio
-#> 1   190    0.5368421
-#> 2   185    0.4864865
-#> 3    16    0.5625000
-#> 4   375    0.2640000
-#> 5    22    1.0000000
-#> 6    40    0.6750000
+#> 1    26    0.4230769
+#> 2     7    0.7142857
+#> 3    54    0.4259259
+#> 4    31    0.6129032
+#> 5    10    0.8000000
+#> 6    13    0.2307692
 ```
 
 ## Empirical distribution
@@ -79,7 +79,7 @@ weighted expected binomial distribution.
 ```r
 sse <- sum((empirical - d_combined_sorted_binned[,2])^2)
 sse
-#> [1] 0.007432315
+#> [1] 0.01021275
 ```
 
 Choose the overdispersion parameter for the beta-binomial distribution
@@ -94,13 +94,13 @@ overdispersion_details <- choose_overdispersion_parameter(
   sse
 )
 head(overdispersion_details[["b_and_sse"]])
-#>        b         sse
-#> [1,] 0.0 0.007432315
-#> [2,] 0.1 0.015246404
-#> [3,] 0.2 0.024126144
-#> [4,] 0.0 0.000000000
-#> [5,] 0.0 0.000000000
-#> [6,] 0.0 0.000000000
+#>        b          sse
+#> [1,] 0.0 0.0102127465
+#> [2,] 0.1 0.0006422622
+#> [3,] 0.2 0.0014597917
+#> [4,] 0.0 0.0000000000
+#> [5,] 0.0 0.0000000000
+#> [6,] 0.0 0.0000000000
 ```
 
 Generate a plot of the weighted expected binomial and weighted expected 
@@ -132,7 +132,7 @@ paste(
   ", SSE_chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b_chosen = 0.1 , SSE_chosen = 0.0152464044437993"
+#> [1] "b_chosen = 0.1 , SSE_chosen = 0.000642262182221375"
 ```
 
 Optimize the overdispersion parameter
@@ -171,10 +171,10 @@ list(
   sse = optimized_overdispersion_details[["sse"]]
 )
 #> $b
-#> [1] 0.008984375
+#> [1] 0.1109375
 #> 
 #> $sse
-#> [1] 0.001672135
+#> [1] 0.0006221425
 ```
 
 Plot the parameter search space
