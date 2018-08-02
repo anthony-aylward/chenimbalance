@@ -156,6 +156,7 @@ FDR_txt <- data.frame(
   FDR_betabin = fdr_betabin
 )
 FDR_txt = FDR_txt[-nrow(FDR_txt),]
+head(FDR_txt)
 ```
 
 Take in counts.txt and filter by p.betabin
