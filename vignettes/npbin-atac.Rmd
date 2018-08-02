@@ -29,6 +29,8 @@ data <- data.frame(
   total = total_reads,
   allelicRatio =  atac[["xm"]] / atac[["m"]]
 )
+data <- data[total_reads >= 5,]
+data <- data[1:2000,]
 head(data)
 ```
 
