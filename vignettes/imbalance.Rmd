@@ -49,7 +49,7 @@ p_betabin <- apply(
     1,
     function(x) min(x, 1)
 )
-head(p_bin)
+accb[["p_betabin"]] <- p_betabin
 ```
 
 Simulations
@@ -161,6 +161,6 @@ FDR_txt = FDR_txt[-nrow(FDR_txt),]
 Take in counts.txt and filter by p.betabin
 
 ```{r}
-interestingHets_betabinom = data1[data1[["p_betabin"]] <= p_choice_betabin,]
+interestingHets_betabinom = accb[accb[["p_betabin"]] <= p_choice_betabin,]
 head(interestingHets_betabinom)
 ```
