@@ -43,7 +43,7 @@
 #'   ** gene regions are defined in GENCODE v17.
 #' }
 #' @format A data frame with 8806 rows and 12 variables
-#' @source @source \url{http://alleledb.gersteinlab.org/download/}
+#' @source \url{http://alleledb.gersteinlab.org/download/}
 "asb"
 
 #' @title SNVs that are accessible to allele-specific binding
@@ -87,5 +87,5 @@
 #'   ** gene regions are defined in GENCODE v17.
 #' }
 #' @format A data frame with 276589 rows and 12 variables
-#' @source @source \url{http://alleledb.gersteinlab.org/download/}
+#' @source \url{http://alleledb.gersteinlab.org/download/}
 "accb"
