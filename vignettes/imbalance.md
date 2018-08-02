@@ -1,7 +1,7 @@
 ---
 title: "Chen 2016 allelic imbalance"
 author: "Anthony Aylward"
-date: "2018-08-01"
+date: "2018-08-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -50,9 +50,7 @@ p_betabin <- apply(
     1,
     function(x) min(x, 1)
 )
-head(p_bin)
-#> [1] 5.684342e-14 6.029232e-01 6.397694e-01 1.000000e+00 1.000000e+00
-#> [6] 2.212524e-04
+accb[["p_betabin"]] <- p_betabin
 ```
 
 Simulations
@@ -194,8 +192,20 @@ Take in counts.txt and filter by p.betabin
 
 
 ```r
-interestingHets_betabinom = data1[data1[["p_betabin"]] <= p_choice_betabin,]
-#> Error in eval(expr, envir, enclos): object 'data1' not found
+interestingHets_betabinom = accb[accb[["p_betabin"]] <= p_choice_betabin,]
 head(interestingHets_betabinom)
-#> Error in head(interestingHets_betabinom): object 'interestingHets_betabinom' not found
+#>     chr  start    end     TF_indiv_accB ref alt cA cC cG cT   p.binomial
+#> 1  chr1  91604  91605  SA1_NA19099_accB   C   T  0 45  0  0 5.684342e-14
+#> 6  chr1 714018 714019 POL2_NA18505_accB   A   G  2  0 19  0 2.212524e-04
+#> 7  chr1 714018 714019 POL2_NA19099_accB   A   G  2  0 19  0 2.212524e-04
+#> 8  chr1 714018 714019  SA1_NA18505_accB   A   G 54  0 16  0 5.853956e-06
+#> 11 chr1 762484 762485 RPB2_NA11894_accB   C   A  0 11  0  0 9.765625e-04
+#> 15 chr1 762600 762601 RPB2_NA11894_accB   T   C  0 12  0  0 4.882812e-04
+#>    p.betabinomial    p_betabin
+#> 1    0.0003760213 2.173231e-09
+#> 6    0.0031147471 1.475486e-03
+#> 7    0.0025591824 1.475486e-03
+#> 8    0.2424655815 2.451691e-03
+#> 11   0.0045665860 2.334527e-03
+#> 15   0.0029682809 1.368218e-03
 ```
