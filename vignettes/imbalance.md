@@ -16,6 +16,7 @@ First, import the libraries we will use
 
 ```r
 library(VGAM)
+#> Loading required package: methods
 #> Loading required package: stats4
 #> Loading required package: splines
 library(chenimbalance)
@@ -94,11 +95,59 @@ head(fp_binomial)
 
 
 ```r
-fp_betabinomial <- as.data.frame(
+fp_betabinomial <- data.frame(
   pval = p_thresh,
   FP_betabin = sapply(p_thresh, function(x) fp(w, p, x, "betabinomial", b))
 )
-#> Error in as.data.frame(pval = p_thresh, FP_betabin = sapply(p_thresh, : argument "x" is missing, with no default
 head(fp_betabinomial)
-#> Error in head(fp_betabinomial): object 'fp_betabinomial' not found
+#>    pval FP_betabin
+#> 1 0.000     0.0000
+#> 2 0.001   156.5733
+#> 3 0.002   310.6079
+#> 4 0.003   492.6134
+#> 5 0.004   670.8305
+#> 6 0.005   886.3256
+```
+
+FDR.txt
+
+
+```r
+tp_bin <- sapply(p_thresh, cutoff, y = p_bin) + 1
+tp_betabin <- sapply(p_thresh, cutoff , y = p_betabin) + 1
+fdr_bin <- fp_binomial[,2] / tp_bin
+fdr_betabin <- fp_betabinomial[,2] / tp_betabin
+p_choice_bin <- max(p_thresh[fdr_bin <= FDR_thresh])
+p_choice_betabin = max(p_thresh[fdr_betabin <= FDR_thresh])
+
+fdr_choice_bin <- max(fdr_bin[fdr_bin <= FDR_thresh])
+fdr_choice_betabin <- max(fdr_betabin[fdr_betabin <= FDR_thresh])
+```
+
+Bisection method to find p-value
+
+
+```r
+p_choice_bin_1 <- as.data.frame(
+  bisect(
+    p_bin,
+    fp_bin[,2],
+    p_choice_bin,
+    fdr_choice_bin,
+    FDR_thresh,
+    step,
+    "binomial",
+    b = 0,
+    w,
+    p
+  )
+)
+head(p_choice_bin_1)
+#>         V1         V2            V3
+#> 1 0.009000 0.04976522 10.0000000000
+#> 2 0.008950 0.04973056  0.0002694351
+#> 3 0.008975 0.04973830  0.0002616973
+#> 4 0.009000 0.04976687  0.0002331255
+#> 5 0.009025 0.04980405  0.0001959499
+#> 6 0.009050 0.05026891 -0.0002689141
 ```

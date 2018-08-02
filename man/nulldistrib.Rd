@@ -4,8 +4,8 @@
 \alias{nulldistrib}
 \title{Weighted beta/binomial distribution}
 \usage{
-nulldistrib(w, minN = 6, p = 0.5, binSize = 40,
-  distrib = "binomial", b = 0)
+nulldistrib(w, minN = 6, p = 0.5, binSize = 40, distrib = "binomial",
+  b = 0)
 }
 \arguments{
 \item{w}{Data frame or matrix giving}
