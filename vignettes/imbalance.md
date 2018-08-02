@@ -118,7 +118,7 @@ tp_betabin <- sapply(p_thresh, cutoff , y = p_betabin) + 1
 fdr_bin <- fp_binomial[,2] / tp_bin
 fdr_betabin <- fp_betabinomial[,2] / tp_betabin
 p_choice_bin <- max(p_thresh[fdr_bin <= FDR_thresh])
-p_choice_betabin = max(p_thresh[fdr_betabin <= FDR_thresh])
+p_choice_betabin <- max(p_thresh[fdr_betabin <= FDR_thresh])
 
 fdr_choice_bin <- max(fdr_bin[fdr_bin <= FDR_thresh])
 fdr_choice_betabin <- max(fdr_betabin[fdr_betabin <= FDR_thresh])
@@ -142,12 +142,60 @@ p_choice_bin_1 <- as.data.frame(
     p
   )
 )
-head(p_choice_bin_1)
+p_choice_betabin_1 <- as.data.frame(
+  bisect(
+    p_betabin,
+    fp_betabinomial[,2],
+    p_choice_betabin,
+    fdr_choice_betabin,
+    FDR_thresh,
+    step,
+    "betabinomial",
+    b = b,
+    w,
+    p
+  )
+)
+head(p_choice_betabin_1)
 #>         V1         V2            V3
-#> 1 0.009000 0.04976522 10.0000000000
-#> 2 0.008950 0.04973056  0.0002694351
-#> 3 0.008975 0.04973830  0.0002616973
-#> 4 0.009000 0.04976687  0.0002331255
-#> 5 0.009025 0.04980405  0.0001959499
-#> 6 0.009050 0.05026891 -0.0002689141
+#> 1 0.004000 0.04903015 10.0000000000
+#> 2 0.003950 0.04882447  0.0011755293
+#> 3 0.003975 0.04888301  0.0011169918
+#> 4 0.004000 0.04903373  0.0009662665
+#> 5 0.004025 0.04934589  0.0006541134
+#> 6 0.004050 0.05088008 -0.0008800844
+```
+
+
+```r
+p_choice_bin_1 <- p_choice_bin_1[p_choice_bin_1[,3] > 0,]
+p_choice_bin_2 <- p_choice_bin_1[nrow(p_choice_bin_1), 1]
+p_choice_betabin_1 <- p_choice_betabin_1[p_choice_betabin_1[,3] > 0,]
+p_choice_betabin_2 <- p_choice_betabin_1[nrow(p_choice_betabin_1), 1]
+```
+
+Formatting FDR_txt
+
+
+```r
+FDR_txt <- data.frame(
+  pval = p_thresh,
+  P_bin = tp_bin,
+  FP_bin = fp_binomial[,2],
+  FDR_bin = fdr_bin,
+  P_betabin = tp_betabin,
+  FP_betabin = fp_betabinomial[,2],
+  FDR_betabin = fdr_betabin
+)
+FDR_txt = FDR_txt[-nrow(FDR_txt),]
+```
+
+Take in counts.txt and filter by p.betabin
+
+
+```r
+interestingHets_betabinom = data1[data1[["p_betabin"]] <= p_choice_betabin,]
+#> Error in eval(expr, envir, enclos): object 'data1' not found
+head(interestingHets_betabinom)
+#> Error in head(interestingHets_betabinom): object 'interestingHets_betabinom' not found
 ```
