@@ -119,5 +119,19 @@ p_choice_bin_1 <- as.data.frame(
     p
   )
 )
-head(p_choice_bin_1)
+p_choice_betabin_1 <- as.data.frame(
+  bisect(
+    p_betabin,
+    fp_betabinomial[,2],
+    p_choice_betabin,
+    fdr_choice_betabin,
+    FDR_thresh,
+    step,
+    "betabinomial",
+    b = b,
+    w,
+    p
+  )
+)
+head(p_choice_betabin_1)
 ```
