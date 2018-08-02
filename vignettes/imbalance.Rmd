@@ -16,19 +16,68 @@ knitr::opts_chunk$set(
 )
 ```
 
+First, import the libraries we will use
+
 ```{r}
+library(VGAM)
 library(chenimbalance)
+```
+
+Set some parameters
+
+```{r}
 FDR.thresh <- 0.05
 p <- 0.5
-cACGT <- data.frame(cA = accb$cA, cC = accb$cC, cG = accb$cG, cT = accb$cT)
+b <- 0.01855469
+```
+
+Prepare the data
+
+```{r}
+cACGT <- accb[c("cA", "cC", "cG", "cT")]
 lower <- apply(cACGT, 1, function(x) sort(x, partial = 3)[3])
 higher <- apply(cACGT, 1, max)
 total <- higher + lower
-b <- 0.01855469
 p.bin = apply(
   data.frame(2 * mapply(pbinom, lower, total, p)),
   1,
   function(x) min(x, 1)
 )
+p.betabin = apply(
+  data.frame(
+    2 * mapply(pbetabinom, lower, total, p, b)),
+    1,
+    function(x) min(x, 1)
+)
 head(p.bin)
+```
+
+Simulations
+
+```{r}
+step = 0.0001
+p_thresh = data.frame(
+  c(
+    seq(0, 0.01, by = 0.001),
+    seq(0.01, 0.1, by = 0.01)[-1],
+    seq(0.1, 1, by = 0.1)[-1]
+  )
+)
+```
+
+Table of empirical counts
+
+```{r}
+w = as.data.frame(table(total), stringsAsFactors = F)
+w = w[as.numeric(w[,1]) >= 6,]
+```
+
+FP
+
+```{r}
+fp_binomial = data.frame(
+  pval = p_thresh,
+  FP_Bin = apply(p_thresh, 1, function(x) fp(w, p, x, "binomial"))
+)
+head(fp_binomial)
 ```
