@@ -38,7 +38,7 @@ head(data)
 
 Compute the empirical allelic ratio distribution
 
-```{r}
+```{r overdisp_empirical_dist}
 binSize <- 40
 bins <- pretty(0:1, binSize)
 minN <- 6
@@ -56,7 +56,7 @@ empirical <- empirical_allelic_ratio(
 
 Compute the weighted expected binomial distribution
 
-```{r}
+```{r overdisp_expected_binomial}
 w <- weight_by_empirical_counts(data[["total"]])
 d_combined_sorted_binned <- nulldistrib(
   w,
@@ -68,14 +68,14 @@ d_combined_sorted_binned <- nulldistrib(
 Compute the sum of squared errors for the empirical distribution vs the 
 weighted expected binomial distribution.
 
-```{r}
+```{r overdisp_binomial_sse}
 sse <- sum((empirical - d_combined_sorted_binned[,2])^2)
 sse
 ```
 
 Choose the overdispersion parameter for the beta-binomial distribution
 
-```{r}
+```{r overdisp_choose_parameter}
 w_grad <- graded_weights_for_sse_calculation(r_min = 0, r_max = 1, bins = bins)
 overdispersion_details <- choose_overdispersion_parameter(
   w_grad,
@@ -89,7 +89,7 @@ head(overdispersion_details[["b_and_sse"]])
 Generate a plot of the weighted expected binomial and weighted expected 
 beta-binomial distributions overlaid on the empirical distribution
 
-```{r}
+```{r overdisp_plot_initial_dist}
 plot_distributions(
   minN,
   maxN,
@@ -104,7 +104,7 @@ plot_distributions(
 `overdispersion_details` is a list whose elements include the chosen value of 
 `b` and the sum of squared errors.
 
-```{r}
+```{r overdisp_details}
 paste(
   "b_chosen =",
   overdispersion_details[["b_choice"]],
@@ -115,7 +115,7 @@ paste(
 
 Optimize the overdispersion parameter
 
-```{r}
+```{r overdisp_optimize_parameter}
 optimized_overdispersion_details <- optimize_overdispersion_parameter(
   w_grad,
   overdispersion_details[["b_and_sse"]],
@@ -139,7 +139,7 @@ plot_distributions(
 
 Check the optimized value
 
-```{r}
+```{r overdisp_optimized_value}
 list(
   b = optimized_overdispersion_details[["b_choice"]],
   sse = optimized_overdispersion_details[["sse"]]
@@ -148,7 +148,7 @@ list(
 
 Plot the parameter search space
 
-```{r}
+```{r overdisp_plot_space}
 b_and_sse <- (
   optimized_overdispersion_details[["b_and_sse"]]
   [1:(optimized_overdispersion_details[["counter"]] + 2),]
