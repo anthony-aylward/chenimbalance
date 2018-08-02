@@ -91,15 +91,15 @@ head(fp_betabinomial)
 FDR.txt
 
 ```{r}
-tp_bin = apply(p_thresh, 1, cutoff, y = p_bin) + 1
-tp_betabin = apply(p_thresh, 1, cutoff , y = p_betabin) + 1
-fdr_bin = fp_binomial[,2] / tp_bin
-fdr_betabin = fp_betabinomial[,2] / tp_betabin
-p_choice_bin = max(p_thresh[,1][fdr_bin <= FDR_thresh])
-p_choice_betabin = max(p_thresh[,1][fdr_betabin <= FDR_thresh])
+tp_bin <- sapply(p_thresh, cutoff, y = p_bin) + 1
+tp_betabin <- sapply(p_thresh, cutoff , y = p_betabin) + 1
+fdr_bin <- fp_binomial[,2] / tp_bin
+fdr_betabin <- fp_betabinomial[,2] / tp_betabin
+p_choice_bin <- max(p_thresh[fdr_bin <= FDR_thresh])
+p_choice_betabin = max(p_thresh[fdr_betabin <= FDR_thresh])
 
-fdr_choice_bin = max(fdr_bin[fdr_bin <= FDR_thresh])
-fdr_choice_betabin = max(fdr_betabin[fdr_betabin <= FDR_thresh])
+fdr_choice_bin <- max(fdr_bin[fdr_bin <= FDR_thresh])
+fdr_choice_betabin <- max(fdr_betabin[fdr_betabin <= FDR_thresh])
 ```
 
 Bisection method to find p-value
