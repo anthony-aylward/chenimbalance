@@ -1,0 +1,33 @@
+---
+title: "Chen 2016 allelic imbalance"
+author: "Anthony Aylward"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+FDR.thresh <- 0.05
+p <- 0.5
+cACGT <- data.frame(cA = accb$cA, cC = accb$cC, cG = accb$cG, cT = accb$cT)
+lower <- apply(cACGT, 1, function(x) sort(x, partial = 3)[3])
+higher <- apply(cACGT, 1, max)
+total <- higher + lower
+b <- 0.01855469
+p.bin = apply(
+  data.frame(2 * mapply(pbinom, lower, total, p)),
+  1,
+  function(x) min(x, 1)
+)
+head(p.bin)
+```
