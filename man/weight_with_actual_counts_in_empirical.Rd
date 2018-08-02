@@ -4,8 +4,7 @@
 \alias{weight_with_actual_counts_in_empirical}
 \title{Weight each coverage level with actual counts in empirical}
 \usage{
-weight_with_actual_counts_in_empirical(d.combined, d, w, i, k, ptr,
-  minN = 6)
+weight_with_actual_counts_in_empirical(d.combined, d, w, i, k, ptr, minN = 6)
 }
 \arguments{
 \item{d.combined}{The combined pseudodistribution}
