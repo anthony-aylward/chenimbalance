@@ -3,4 +3,4 @@ This package contains utilities for estimating a beta-binomial overdispersion pa
 
 Compare the results of the included [vignette](https://github.com/anthony-aylward/chenimbalance/blob/master/vignettes/overdispersion.md) to Fig. 2 of that paper.
 
-The code was adapted from the authors' R script found in the  [alleleDB pipeline](https://github.com/gersteinlab/alleleDB/blob/release/v2.0/alleledb_pipeline/)
+The code was adapted from the authors' R scripts found in the  [alleleDB pipeline](https://github.com/gersteinlab/alleleDB/blob/release/v2.0/alleledb_pipeline/)
