@@ -96,7 +96,7 @@ tp_betabin <- sapply(p_thresh, cutoff , y = p_betabin) + 1
 fdr_bin <- fp_binomial[,2] / tp_bin
 fdr_betabin <- fp_betabinomial[,2] / tp_betabin
 p_choice_bin <- max(p_thresh[fdr_bin <= FDR_thresh])
-p_choice_betabin = max(p_thresh[fdr_betabin <= FDR_thresh])
+p_choice_betabin <- max(p_thresh[fdr_betabin <= FDR_thresh])
 
 fdr_choice_bin <- max(fdr_bin[fdr_bin <= FDR_thresh])
 fdr_choice_betabin <- max(fdr_betabin[fdr_betabin <= FDR_thresh])
@@ -134,4 +134,33 @@ p_choice_betabin_1 <- as.data.frame(
   )
 )
 head(p_choice_betabin_1)
+```
+
+```{r}
+p_choice_bin_1 <- p_choice_bin_1[p_choice_bin_1[,3] > 0,]
+p_choice_bin_2 <- p_choice_bin_1[nrow(p_choice_bin_1), 1]
+p_choice_betabin_1 <- p_choice_betabin_1[p_choice_betabin_1[,3] > 0,]
+p_choice_betabin_2 <- p_choice_betabin_1[nrow(p_choice_betabin_1), 1]
+```
+
+Formatting FDR_txt
+
+```{r}
+FDR_txt <- data.frame(
+  pval = p_thresh,
+  P_bin = tp_bin,
+  FP_bin = fp_binomial[,2],
+  FDR_bin = fdr_bin,
+  P_betabin = tp_betabin,
+  FP_betabin = fp_betabinomial[,2],
+  FDR_betabin = fdr_betabin
+)
+FDR_txt = FDR_txt[-nrow(FDR_txt),]
+```
+
+Take in counts.txt and filter by p.betabin
+
+```{r}
+interestingHets_betabinom = data1[data1[["p_betabin"]] <= p_choice_betabin,]
+head(interestingHets_betabinom)
 ```
