@@ -56,7 +56,7 @@ empirical <- empirical_allelic_ratio(
 )
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk atac_empirical_dist](figure/atac_empirical_dist-1.png)
 
 ## Expected Binomial and Beta-Binomial distributions
 
@@ -119,7 +119,7 @@ plot_distributions(
 )
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk atac_plot_initial_dist](figure/atac_plot_initial_dist-1.png)
 
 `overdispersion_details` is a list whose elements include the chosen value of 
 `b` and the sum of squared errors.
@@ -160,7 +160,7 @@ plot_distributions(
 )
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk atac_optimize_parameter](figure/atac_optimize_parameter-1.png)
 
 Check the optimized value
 
@@ -208,4 +208,4 @@ plot(
 )
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
+![plot of chunk atac_plot_space](figure/atac_plot_space-1.png)
