@@ -216,7 +216,7 @@ plot(
 ![plot of chunk ctcf_plot_space](figure/ctcf_plot_space-1.png)
 
 Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null beta estimated from NPBin (blue).
+superimposed with the null beta estimated from NPBin (gold).
 
 
 ```r
