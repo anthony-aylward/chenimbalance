@@ -175,3 +175,10 @@ plot(
   ylim = c(min(b_and_sse[,2]), max(b_and_sse[,2]))
 )
 ```
+
+Compute the symmetric shape parameter and plot the estimated null beta
+
+```{r npbin_atac_estimated_null}
+shape = 1 / (2 * b) - 1 / 2
+plot_estimated_null(data[["allelicRatio"]], shape, shape)
+```
