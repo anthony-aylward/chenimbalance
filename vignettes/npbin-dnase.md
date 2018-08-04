@@ -215,12 +215,17 @@ plot(
 
 ![plot of chunk dnase_plot_space](figure/dnase_plot_space-1.png)
 
-Compute the symmetric shape parameter and plot the estimated null beta
+Compute the symmetric shape parameter and plot the estimated null beta (teal)
+superimposed with the null beta estimated from NPBin (blue).
 
 
 ```r
 shape = 1 / (2 * optimized_overdispersion_details[["b_choice"]]) - 1 / 2
-plot_estimated_null(data[["allelicRatio"]], shape, shape)
+plot_estimated_null(
+  data[["allelicRatio"]],
+  shape1_shape2 = c(15.30666, 15.11449),
+  shape3_shape4 = c(shape, shape)
+)
 ```
 
 ![plot of chunk npbin_dnase_estimated_null](figure/npbin_dnase_estimated_null-1.png)
