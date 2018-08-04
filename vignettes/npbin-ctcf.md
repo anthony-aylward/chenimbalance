@@ -20,11 +20,6 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
-#> 
-#> Attaching package: 'npbin'
-#> The following object is masked from 'package:chenimbalance':
-#> 
-#>     color_palette
 total_reads <- ctcf[["m"]]
 data <- data.frame(
   total = total_reads,
