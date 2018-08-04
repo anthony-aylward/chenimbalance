@@ -177,7 +177,7 @@ plot(
 ```
 
 Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null estimated from NPBin (blue).
+superimposed with the null beta estimated from NPBin (blue).
 
 ```{r npbin_ctcf_estimated_null}
 shape = 1 / (2 * optimized_overdispersion_details[["b_choice"]]) - 1 / 2
