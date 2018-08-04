@@ -1,7 +1,7 @@
 ---
 title: "Estimate overdispersion on the ctcf dataset from the NPBin paper"
 author: "Anthony Aylward"
-date: "2018-08-02"
+date: "2018-08-03"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -20,6 +20,11 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
+#> 
+#> Attaching package: 'npbin'
+#> The following object is masked from 'package:chenimbalance':
+#> 
+#>     color_palette
 total_reads <- ctcf[["m"]]
 data <- data.frame(
   total = total_reads,
@@ -209,3 +214,13 @@ plot(
 ```
 
 ![plot of chunk ctcf_plot_space](figure/ctcf_plot_space-1.png)
+
+Compute the symmetric shape parameter and plot the estimated null beta
+
+
+```r
+shape = 1 / (2 * optimized_overdispersion_details[["b_choice"]]) - 1 / 2
+plot_estimated_null(data[["allelicRatio"]], shape, shape)
+```
+
+![plot of chunk npbin_ctcf_estimated_null](figure/npbin_ctcf_estimated_null-1.png)
