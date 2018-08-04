@@ -1,7 +1,7 @@
 ---
 title: "Weighted expected binomial model"
 author: "Anthony Aylward"
-date: "2018-08-01"
+date: "2018-08-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -26,6 +26,7 @@ data <- data.frame(
     }
   )
 )
+data <- data[1:2000,]
 head(data)
 #>   total allelicRatio
 #> 1    45    1.0000000
@@ -55,7 +56,7 @@ empirical <- empirical_allelic_ratio(
 )
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk overdisp_empirical_dist](figure/overdisp_empirical_dist-1.png)
 
 ## Expected Binomial and Beta-Binomial distributions
 
@@ -78,7 +79,7 @@ weighted expected binomial distribution.
 ```r
 sse <- sum((empirical - d_combined_sorted_binned[,2])^2)
 sse
-#> [1] 0.005153999
+#> [1] 0.00662428
 ```
 
 Choose the overdispersion parameter for the beta-binomial distribution
@@ -94,9 +95,9 @@ overdispersion_details <- choose_overdispersion_parameter(
 )
 head(overdispersion_details[["b_and_sse"]])
 #>        b         sse
-#> [1,] 0.0 0.005153999
-#> [2,] 0.1 0.006505881
-#> [3,] 0.2 0.013358063
+#> [1,] 0.0 0.006624280
+#> [2,] 0.1 0.006308586
+#> [3,] 0.2 0.013347326
 #> [4,] 0.0 0.000000000
 #> [5,] 0.0 0.000000000
 #> [6,] 0.0 0.000000000
@@ -118,7 +119,7 @@ plot_distributions(
 )
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk overdisp_plot_initial_dist](figure/overdisp_plot_initial_dist-1.png)
 
 `overdispersion_details` is a list whose elements include the chosen value of 
 `b` and the sum of squared errors.
@@ -131,7 +132,7 @@ paste(
   ", SSE_chosen =",
   overdispersion_details[["sse"]]
 )
-#> [1] "b_chosen = 0.1 , SSE_chosen = 0.00650588067002629"
+#> [1] "b_chosen = 0.1 , SSE_chosen = 0.00630858569475557"
 ```
 
 Optimize the overdispersion parameter
@@ -159,7 +160,7 @@ plot_distributions(
 )
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk overdisp_optimize_parameter](figure/overdisp_optimize_parameter-1.png)
 
 Check the optimized value
 
@@ -170,10 +171,10 @@ list(
   sse = optimized_overdispersion_details[["sse"]]
 )
 #> $b
-#> [1] 0.01855469
+#> [1] 0.02089844
 #> 
 #> $sse
-#> [1] 0.0004221577
+#> [1] 0.0003644314
 ```
 
 Plot the parameter search space
@@ -207,4 +208,4 @@ plot(
 )
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
+![plot of chunk overdisp_plot_space](figure/overdisp_plot_space-1.png)
