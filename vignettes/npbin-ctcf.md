@@ -20,11 +20,6 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
-#> 
-#> Attaching package: 'npbin'
-#> The following object is masked from 'package:chenimbalance':
-#> 
-#>     color_palette
 total_reads <- ctcf[["m"]]
 data <- data.frame(
   total = total_reads,
@@ -216,7 +211,7 @@ plot(
 ![plot of chunk ctcf_plot_space](figure/ctcf_plot_space-1.png)
 
 Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null beta estimated from NPBin (blue).
+superimposed with the null beta estimated from NPBin (gold).
 
 
 ```r
