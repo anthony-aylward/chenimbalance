@@ -9,7 +9,7 @@
 #' @export
 weight_by_empirical_counts <- function(total) {
   t <- as.data.frame(table(total), stringsAsFactors = FALSE)
-  w <- matrix(0, max(total, na.rm = TRUE), 1)
+  w <- matrix(0, max(total), 1)
   for (j in 1:nrow(t)) {
     w[as.integer(t[j, 1]), 1] <- t[j, 2]
   }
