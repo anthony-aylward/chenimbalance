@@ -6,7 +6,7 @@
 \title{SNVs associated with allele-specific binding (ASB)}
 \format{A data frame with 8806 rows and 12 variables}
 \source{
-@source \url{http://alleledb.gersteinlab.org/download/}
+\url{http://alleledb.gersteinlab.org/download/}
 }
 \usage{
 asb

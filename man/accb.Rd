@@ -6,7 +6,7 @@
 \title{SNVs that are accessible to allele-specific binding}
 \format{A data frame with 276589 rows and 12 variables}
 \source{
-@source \url{http://alleledb.gersteinlab.org/download/}
+\url{http://alleledb.gersteinlab.org/download/}
 }
 \usage{
 accb

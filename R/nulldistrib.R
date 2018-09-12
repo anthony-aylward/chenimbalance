@@ -78,7 +78,9 @@ bin_according_to_empirical_distribution <- function(
 #' @param d.combined The combined pseudodistribution
 #' @param d The parametric density value
 #' @param w w
+#' @param i i
 #' @param k k
+#' @param ptr ptr
 #' @param minN Integer. The minimum coverage level.
 #' @return The combined pseudodistribution weighted by the empirical
 #'   distribution
