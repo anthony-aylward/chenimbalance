@@ -55,7 +55,7 @@ choose_probability_of_success_parameter <- function(
   break_signal <- FALSE
   for (i in seq(to = length(prob_range), by = n_cores)) {
     distribution_list <- mclapply(
-      prob_range[i:min(length(b_range), i + n_cores - 1)],
+      prob_range[i:min(length(prob_range), i + n_cores - 1)],
       function(k) {
         nulldistrib(
           w,
@@ -147,7 +147,7 @@ optimize_probability_of_success_parameter <- function(
     r_sta <- max(0, prob_choice - r_by)
     r_end <- prob_choice + r_by
     r_by <- r_by / 2
-    b_range <- seq(r_sta, r_end, by = r_by)
+    prob_range <- seq(r_sta, r_end, by = r_by)
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
     sse <- prob_and_sse[1, 2]
