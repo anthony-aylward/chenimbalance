@@ -4,7 +4,19 @@
 \alias{alleledb_beta_binomial}
 \title{optimize beta-binomial parameters}
 \usage{
-alleledb_beta_binomial(counts, minN = 6, binSize = 40)
+alleledb_beta_binomial(total, allelic_ratio, minN = 6, binSize = 40)
+}
+\arguments{
+\item{total}{integer; total number of reads at each site}
+
+\item{allelic_ratio}{numeric; allelic ratio at each site}
+
+\item{minN}{minimum coverage level}
+
+\item{binSize}{approximate number of bins}
+}
+\value{
+list
 }
 \description{
 optimize beta-binomial parameters

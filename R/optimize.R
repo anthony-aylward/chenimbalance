@@ -4,15 +4,23 @@
 
 #' @title optimize beta-binomial parameters
 #'
-#'
+#' @param total integer; total number of reads at each site
+#' @param allelic_ratio numeric; allelic ratio at each site
+#' @param minN minimum coverage level
+#' @param binSize approximate number of bins
+#' @return list
+#' @export
 alleledb_beta_binomial <- function(
-  counts,
+  total,
+  allelic_ratio,
   minN = 6,
   binSize = 40
 ) {
   bins <- pretty(0:1, binSize)
-  maxN = min(2500, max(x[["total"]]))
-  counts <- counts[counts[["total"]] >= minN,]
+  maxN = min(2500, max(total))
+  counts <- (
+    data.frame(total = total, allelicRatio = allelic_ratio)[total >= minN,]
+  )
   empirical <- empirical_allelic_ratio(
     counts,
     bins,
@@ -70,5 +78,11 @@ alleledb_beta_binomial <- function(
   )
   prob = optimized_prob_details[["prob_choice"]]
   sse = optimized_prob_details[["sse"]]
-  list(prob = prob, b = b, sse = sse)
+  list(
+    prob = prob,
+    b = b,
+    sse = sse,
+    shape1 = prob * (1 - b) / b,
+    shape2 = (1 - prob) * (1 - b) / b
+  )
 }
