@@ -7,7 +7,7 @@
 weight_by_empirical_counts(total)
 }
 \arguments{
-\item{total}{Vector containing coverage per variant}
+\item{total}{integer vector containing coverage per variant}
 }
 \value{
 A one-column matrix of weights for each coverage level

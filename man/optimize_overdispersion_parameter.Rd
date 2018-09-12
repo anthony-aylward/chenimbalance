@@ -5,7 +5,8 @@
 \title{Optimize the overdispersion parameter}
 \usage{
 optimize_overdispersion_parameter(w_grad, b_and_sse, b_choice, sse,
-  empirical, counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1)
+  empirical, counter, minN = 6, p = 0.5, binSize = 40, r_by = 0.1,
+  n_cores = detectCores())
 }
 \arguments{
 \item{w_grad}{w_grad}
@@ -25,6 +26,8 @@ optimize_overdispersion_parameter(w_grad, b_and_sse, b_choice, sse,
 \item{binSize}{approximate number of bins}
 
 \item{r_by}{r_by}
+
+\item{n_cores}{number of cores to use}
 }
 \value{
 list

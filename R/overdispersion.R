@@ -23,6 +23,7 @@
 #' @param binSize approximate number of bins
 #' @param r_sta,r_end start and end of the parameter range
 #' @param r_by step of the parameter range
+#' @param n_cores number of cores to use
 #' @return list
 #' @export
 choose_overdispersion_parameter <- function(
@@ -35,7 +36,8 @@ choose_overdispersion_parameter <- function(
   b_choice = 0,
   r_sta = 0.1,
   r_end = 0.99,
-  r_by  = 0.1
+  r_by = 0.1,
+  n_cores = detectCores()
 ) {
   counter <- 1
   b_and_sse = matrix(
@@ -48,7 +50,6 @@ choose_overdispersion_parameter <- function(
   labels <- matrix(0, nrow = 50, ncol = 1)
   b_range <- seq(r_sta, r_end, by = r_by)
   
-  n_cores <- detectCores()
   break_signal <- FALSE
   for (i in seq(to = length(b_range), by = n_cores)) {
     distribution_list <- mclapply(
@@ -78,6 +79,7 @@ choose_overdispersion_parameter <- function(
         signif(sse_bbin, 2)
       )
       
+      print(list(sse_bbin = sse_bbin, sse = sse, k = k, r_sta = r_sta))
       if (sse_bbin < sse || k == r_sta) {
         b_choice <- k
         sse <- sse_bbin
@@ -116,6 +118,7 @@ choose_overdispersion_parameter <- function(
 #' @param p binomial probability of success parameter
 #' @param binSize approximate number of bins
 #' @param r_by r_by
+#' @param n_cores number of cores to use
 #' @return list
 #' @export
 optimize_overdispersion_parameter <- function(
@@ -128,7 +131,8 @@ optimize_overdispersion_parameter <- function(
   minN = 6,
   p = 0.5,
   binSize = 40,
-  r_by = 0.1
+  r_by = 0.1,
+  n_cores = detectCores()
 ) {
   flag <- TRUE
   if (b_choice >= 0.9) {
@@ -145,7 +149,6 @@ optimize_overdispersion_parameter <- function(
     sse <- b_and_sse[1, 2]
     b_choice <- 0
     
-    n_cores <- detectCores()
     break_signal <- FALSE
     for (i in seq(to = length(b_range), by = n_cores)) {
       distribution_list <- mclapply(
