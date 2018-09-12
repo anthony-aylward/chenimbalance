@@ -79,7 +79,6 @@ choose_overdispersion_parameter <- function(
         signif(sse_bbin, 2)
       )
       
-      print(list(sse_bbin = sse_bbin, sse = sse, k = k, r_sta = r_sta))
       if (sse_bbin < sse || k == r_sta) {
         b_choice <- k
         sse <- sse_bbin
