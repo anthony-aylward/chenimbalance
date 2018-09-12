@@ -168,8 +168,6 @@ optimize_overdispersion_parameter <- function(
       for (j in 1:min(n_cores, length(b_range) - i)) {
         k <- b_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
-        print(j)
-        print(head(e_combined_sorted_binned))
 
         ## minimize sse for betabinomials
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
