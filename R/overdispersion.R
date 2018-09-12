@@ -109,6 +109,7 @@ choose_overdispersion_parameter <- function(
 #' @description Minimize sse for betabinomials
 #'
 #' @param w_grad w_grad
+#' @param w w
 #' @param b_and_sse b_and_sse
 #' @param b_choice b_choice
 #' @param empirical empirical
@@ -122,6 +123,7 @@ choose_overdispersion_parameter <- function(
 #' @export
 optimize_overdispersion_parameter <- function(
   w_grad,
+  w,
   b_and_sse,
   b_choice,
   sse,

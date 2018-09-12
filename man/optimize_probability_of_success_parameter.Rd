@@ -4,12 +4,14 @@
 \alias{optimize_probability_of_success_parameter}
 \title{Optimize the probability of success parameter}
 \usage{
-optimize_probability_of_success_parameter(w_grad, prob_and_sse,
+optimize_probability_of_success_parameter(w_grad, w, prob_and_sse,
   prob_choice, sse, empirical, counter, b, minN = 6, binSize = 40,
   r_by = 0.1, n_cores = detectCores())
 }
 \arguments{
 \item{w_grad}{w_grad}
+
+\item{w}{w}
 
 \item{prob_and_sse}{b_and_sse}
 

@@ -48,6 +48,7 @@ alleledb_beta_binomial <- function(
   )
   optimized_overdispersion_details <- optimize_overdispersion_parameter(
     w_grad,
+    w,
     overdispersion_details[["b_and_sse"]],
     overdispersion_details[["b_choice"]],
     overdispersion_details[["sse"]],
@@ -67,6 +68,7 @@ alleledb_beta_binomial <- function(
   )
   optimized_prob_details <- optimize_probability_of_success_parameter(
     w_grad,
+    w,
     prob_details[["prob_and_sse"]],
     prob_details[["prob_choice"]],
     prob_details[["sse"]],

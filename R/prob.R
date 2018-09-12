@@ -112,6 +112,7 @@ choose_probability_of_success_parameter <- function(
 #' @description Minimize sse for betabinomials
 #'
 #' @param w_grad w_grad
+#' @param w w
 #' @param prob_and_sse b_and_sse
 #' @param prob_choice b_choice
 #' @param empirical empirical
@@ -125,6 +126,7 @@ choose_probability_of_success_parameter <- function(
 #' @export
 optimize_probability_of_success_parameter <- function(
   w_grad,
+  w,
   prob_and_sse,
   prob_choice,
   sse,
