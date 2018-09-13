@@ -203,3 +203,22 @@ head(prob_details[["prob_and_sse"]])
 ```{r nobin_atac_prob_choice_sse}
 list(prob = prob_details[["prob_choice"]], sse = prob_details[["sse"]])
 ```
+
+```{r npbin_atac_optimized_prob_details}
+optimized_prob_details <- optimize_probability_of_success_parameter(
+  w_grad,
+  w,
+  prob_details[["prob_and_sse"]],
+  prob_details[["prob_choice"]],
+  prob_details[["sse"]],
+  empirical,
+  prob_details[["counter"]],
+  b,
+  minN = minN,
+  binSize = binSize
+)
+list(
+  prob = optimized_prob_details[["prob_choice"]],
+  sse = optimized_prob_details[["sse"]]
+)
+```
