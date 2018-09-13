@@ -151,7 +151,6 @@ optimize_probability_of_success_parameter <- function(
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
     sse <- prob_and_sse[1, 2]
-    prob_choice <- 0
     
     break_signal <- FALSE
     for (i in seq(to = length(prob_range), by = n_cores)) {
@@ -178,7 +177,7 @@ optimize_probability_of_success_parameter <- function(
         prob_and_sse[(counter + 2), 1] <- k
         prob_and_sse[(counter + 2), 2] <- sse_bbin
         labels[newctr] = paste(
-          "betabin,b=",
+          "betabin,prob=",
           signif(k, 3),
           "; SSE=",
           signif(sse_bbin, 3)
@@ -200,7 +199,10 @@ optimize_probability_of_success_parameter <- function(
       }
     }
     labels = labels[1:(newctr + 1),]
-    if (signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)) {
+    if (
+      signif(prob_and_sse[counter + 2, 2], 3)
+      == signif(prob_and_sse[counter + 1, 2], 3)
+    ) {
       flag <- FALSE
     }
   }
