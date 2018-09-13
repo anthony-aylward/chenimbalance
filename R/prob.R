@@ -35,8 +35,8 @@ choose_probability_of_success_parameter <- function(
   b,
   minN = 6,
   binSize = 40,
-  prob_choice = 0.1,
-  r_sta = 0.2,
+  prob_choice = 0.5,
+  r_sta = 0.1,
   r_end = 0.99,
   r_by = 0.1,
   n_cores = detectCores()
