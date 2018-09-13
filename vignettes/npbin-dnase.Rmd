@@ -118,6 +118,7 @@ Optimize the overdispersion parameter
 ```{r dnase_optimize_parameter}
 optimized_overdispersion_details <- optimize_overdispersion_parameter(
   w_grad,
+  w
   overdispersion_details[["b_and_sse"]],
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
