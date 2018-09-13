@@ -173,8 +173,6 @@ optimize_probability_of_success_parameter <- function(
 
         ## minimize sse for betabinomials
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
-        print(c(counter, k, sse_bbin))
-        print(prob_range)
         prob_and_sse[(counter + 2), 1] <- k
         prob_and_sse[(counter + 2), 2] <- sse_bbin
         labels[newctr] = paste(
@@ -192,6 +190,7 @@ optimize_probability_of_success_parameter <- function(
         }
       }
     }
+    print(c(signif(prob_and_sse[counter + 2, 2], 3), signif(prob_and_sse[counter + 1, 2], 3)))
     labels = labels[1:(newctr + 1),]
     if (
       signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
