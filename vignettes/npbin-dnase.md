@@ -1,7 +1,7 @@
 ---
 title: "Estimate overdispersion on the dnase dataset from the NPBin paper"
 author: "Anthony Aylward"
-date: "2018-08-03"
+date: "2018-09-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -20,11 +20,6 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
-#> 
-#> Attaching package: 'npbin'
-#> The following object is masked from 'package:chenimbalance':
-#> 
-#>     color_palette
 total_reads <- dnase[["m"]]
 data <- data.frame(
   total = total_reads,
@@ -146,6 +141,7 @@ Optimize the overdispersion parameter
 ```r
 optimized_overdispersion_details <- optimize_overdispersion_parameter(
   w_grad,
+  w
   overdispersion_details[["b_and_sse"]],
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
@@ -163,9 +159,11 @@ plot_distributions(
   optimized_overdispersion_details[["e_combined_sorted_binned"]],
   yuplimit = 0.15
 )
+#> Error: <text>:4:3: unexpected symbol
+#> 3:   w
+#> 4:   overdispersion_details
+#>      ^
 ```
-
-![plot of chunk dnase_optimize_parameter](figure/dnase_optimize_parameter-1.png)
 
 Check the optimized value
 
@@ -176,10 +174,10 @@ list(
   sse = optimized_overdispersion_details[["sse"]]
 )
 #> $b
-#> [1] 0.1109375
+#> [1] 0.008984375
 #> 
 #> $sse
-#> [1] 0.0006221425
+#> [1] 0.001672135
 ```
 
 Plot the parameter search space
@@ -215,8 +213,8 @@ plot(
 
 ![plot of chunk dnase_plot_space](figure/dnase_plot_space-1.png)
 
-Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null beta estimated from NPBin (gold).
+Compute the symmetric shape parameter and plot the estimated null beta (gold)
+superimposed with the null beta estimated from NPBin (blue).
 
 
 ```r
