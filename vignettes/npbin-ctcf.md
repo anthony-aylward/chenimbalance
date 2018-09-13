@@ -1,7 +1,7 @@
 ---
 title: "Estimate overdispersion on the ctcf dataset from the NPBin paper"
 author: "Anthony Aylward"
-date: "2018-08-03"
+date: "2018-09-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -141,6 +141,7 @@ Optimize the overdispersion parameter
 ```r
 optimized_overdispersion_details <- optimize_overdispersion_parameter(
   w_grad,
+  w,
   overdispersion_details[["b_and_sse"]],
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
@@ -210,8 +211,8 @@ plot(
 
 ![plot of chunk ctcf_plot_space](figure/ctcf_plot_space-1.png)
 
-Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null beta estimated from NPBin (gold).
+Compute the symmetric shape parameter and plot the estimated null beta (gold)
+superimposed with the null beta estimated from NPBin (blue).
 
 
 ```r

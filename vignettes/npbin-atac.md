@@ -1,7 +1,7 @@
 ---
 title: "Estimate overdispersion on the ATAC-seq dataset from the NPBin paper"
 author: "Anthony Aylward"
-date: "2018-08-03"
+date: "2018-09-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -20,6 +20,11 @@ package.
 ```r
 library(chenimbalance)
 library(npbin)
+#> 
+#> Attaching package: 'npbin'
+#> The following object is masked from 'package:chenimbalance':
+#> 
+#>     color_palette
 total_reads <- atac[["m"]]
 data <- data.frame(
   total = total_reads,
@@ -141,6 +146,7 @@ Optimize the overdispersion parameter
 ```r
 optimized_overdispersion_details <- optimize_overdispersion_parameter(
   w_grad,
+  w,
   overdispersion_details[["b_and_sse"]],
   overdispersion_details[["b_choice"]],
   overdispersion_details[["sse"]],
@@ -210,8 +216,8 @@ plot(
 
 ![plot of chunk atac_plot_space](figure/atac_plot_space-1.png)
 
-Compute the symmetric shape parameter and plot the estimated null beta (teal)
-superimposed with the null beta estimated from NPBin (gold).
+Compute the symmetric shape parameter and plot the estimated null beta (gold)
+superimposed with the null beta estimated from NPBin (blue).
 
 
 ```r
