@@ -217,8 +217,8 @@ optimized_prob_details <- optimize_probability_of_success_parameter(
   minN = minN,
   binSize = binSize
 )
+```
 list(
   prob = optimized_prob_details[["prob_choice"]],
   sse = optimized_prob_details[["sse"]]
 )
-```
