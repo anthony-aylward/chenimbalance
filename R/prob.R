@@ -187,22 +187,14 @@ optimize_probability_of_success_parameter <- function(
         if (sse_bbin < sse) {
           sse <- sse_bbin
           prob_choice <- k 
-        } else if (sse_bbin > sse) {
-          break_signal <- TRUE
-          break
+          counter <- counter + 1
+          newctr <- newctr + 1
         }
-        
-        counter <- counter + 1
-        newctr <- newctr + 1
-      }
-      if (break_signal) {
-        break
       }
     }
     labels = labels[1:(newctr + 1),]
     if (
-      signif(prob_and_sse[counter + 2, 2], 3)
-      == signif(prob_and_sse[counter + 1, 2], 3)
+      signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
     ) {
       flag <- FALSE
     }
