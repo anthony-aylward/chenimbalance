@@ -170,25 +170,22 @@ optimize_probability_of_success_parameter <- function(
       for (j in 1:min(n_cores, length(prob_range) - i)) {
         k <- prob_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
-
-        ## minimize sse for betabinomials
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
+
         if (sse_bbin < sse) {
-          prob_and_sse[(counter + 2), 1] <- k
-          prob_and_sse[(counter + 2), 2] <- sse_bbin
-          labels[newctr] = paste(
-            "betabin,prob=",
-            signif(k, 3),
-            "; SSE=",
-            signif(sse_bbin, 3)
-          )
           sse <- sse_bbin
-          prob_choice <- k 
-          counter <- counter + 1
-          newctr <- newctr + 1
+          prob_choice <- k
         }
       }
     }
+    prob_and_sse[(counter + 2), 1] <- prob_choice
+    prob_and_sse[(counter + 2), 2] <- sse
+    labels[newctr] = paste(
+      "betabin,prob=",
+      signif(prob_choice, 3),
+      "; SSE=",
+      signif(sse, 3)
+    )
     print(c(prob_and_sse[counter + 2,], prob_and_sse[counter + 1,]))
     labels = labels[1:(newctr + 1),]
     if (
@@ -196,6 +193,8 @@ optimize_probability_of_success_parameter <- function(
     ) {
       flag <- FALSE
     }
+    counter <- counter + 1
+    newctr <- newctr + 1
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned,
