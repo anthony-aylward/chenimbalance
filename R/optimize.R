@@ -77,7 +77,8 @@ alleledb_beta_binomial <- function(
     prob_details[["counter"]],
     b,
     minN = minN,
-    binSize = binSize
+    binSize = binSize,
+    r_by = 0.025
   )
   prob = optimized_prob_details[["prob_choice"]]
   sse = optimized_prob_details[["sse"]]
