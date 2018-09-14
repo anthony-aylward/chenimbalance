@@ -151,6 +151,10 @@ optimize_probability_of_success_parameter <- function(
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
     sse <- prob_and_sse[counter, 2]
+
+    prob_and_sse[counter + 2,] <- matrix(c(prob_choice, sse), nrow = 1)
+    counter <- counter + 1
+    newctr <- newctr + 1
     
     break_signal <- FALSE
     for (i in seq(to = length(prob_range), by = n_cores)) {
