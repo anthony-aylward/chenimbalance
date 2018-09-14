@@ -179,7 +179,7 @@ optimize_probability_of_success_parameter <- function(
         e_combined_sorted_binned <- distribution_list[[j]]
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
 
-        print(c(k, sse))
+        print(c(k, sse_bbin))
 
         if (sse_bbin < sse) {
           sse <- sse_bbin
