@@ -14,7 +14,8 @@ alleledb_beta_binomial <- function(
   total,
   allelic_ratio,
   minN = 6,
-  binSize = 40
+  binSize = 40,
+  r_by = 0.1
 ) {
   bins <- pretty(0:1, binSize)
   maxN = min(2500, max(total))
@@ -65,7 +66,7 @@ alleledb_beta_binomial <- function(
     empirical,
     sse,
     b,
-    r_by = 0.1
+    r_by = r_by
   )
   optimized_prob_details <- optimize_probability_of_success_parameter(
     w_grad,
@@ -78,7 +79,7 @@ alleledb_beta_binomial <- function(
     b,
     minN = minN,
     binSize = binSize,
-    r_by = 0.1
+    r_by = r_by
   )
   prob = optimized_prob_details[["prob_choice"]]
   sse = optimized_prob_details[["sse"]]
