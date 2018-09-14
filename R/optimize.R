@@ -141,8 +141,8 @@ alleledb_beta_binomial <- function(
       break
     }
   }
-  prob <- optimized_prob_details[["prob_choice"]],
-  b <- overdispersion_details[["b_choice"]],
+  prob <- optimized_prob_details[["prob_choice"]]
+  b <- overdispersion_details[["b_choice"]]
   list(
     prob = prob,
     b = b,
