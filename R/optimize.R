@@ -83,6 +83,37 @@ alleledb_beta_binomial <- function(
   )
   prob = optimized_prob_details[["prob_choice"]]
   sse = optimized_prob_details[["sse"]]
+  while (TRUE) {
+    b_prev <- optimized_overdispersion_details[["b_choice"]]
+    prob_prev <- optimized_prob_details[["prob_choice"]]
+    optimized_overdispersion_details <- optimize_overdispersion_parameter(
+      w_grad,
+      w,
+      overdispersion_details[["b_and_sse"]],
+      overdispersion_details[["b_choice"]],
+      overdispersion_details[["sse"]],
+      empirical,
+      overdispersion_details[["counter"]],
+      minN = minN,
+      binSize = binSize,
+      p = prob_prev
+    )
+    if (optimized_overdispersion_details[["b_choice"]] == b_prev) break
+    optimized_prob_details <- optimize_probability_of_success_parameter(
+      w_grad,
+      w,
+      prob_details[["prob_and_sse"]],
+      prob_details[["prob_choice"]],
+      prob_details[["sse"]],
+      empirical,
+      prob_details[["counter"]],
+      b_prev,
+      minN = minN,
+      binSize = binSize,
+      r_by = r_by
+    )
+    if (optimized_prob_details[["prob_choice"]] == prob_prev) break
+  }
   list(
     prob = prob,
     b = b,
