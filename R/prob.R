@@ -157,6 +157,8 @@ optimize_probability_of_success_parameter <- function(
     newctr <- newctr + 1
     
     break_signal <- FALSE
+    print(c(prob_choice, sse))
+    print(prob_range)
     for (i in seq(to = length(prob_range), by = n_cores)) {
       distribution_list <- mclapply(
         prob_range[i:min(length(prob_range), i + n_cores - 1)],
@@ -190,7 +192,6 @@ optimize_probability_of_success_parameter <- function(
       "; SSE=",
       signif(sse, 3)
     )
-    print(c(prob_and_sse[counter + 2,], prob_and_sse[counter + 1,]))
     labels = labels[1:(newctr + 1),]
     if (
       signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
