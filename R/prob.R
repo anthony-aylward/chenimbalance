@@ -168,7 +168,8 @@ optimize_probability_of_success_parameter <- function(
             minN = minN,
             binSize = binSize,
             distrib = "betabinomial",
-            b = k
+            p = k,
+            b = b
           )
         },
         mc.cores = n_cores
