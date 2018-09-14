@@ -65,7 +65,7 @@ alleledb_beta_binomial <- function(
     empirical,
     sse,
     b,
-    r_by = 0.025
+    r_by = 0.1
   )
   optimized_prob_details <- optimize_probability_of_success_parameter(
     w_grad,
@@ -78,7 +78,7 @@ alleledb_beta_binomial <- function(
     b,
     minN = minN,
     binSize = binSize,
-    r_by = 0.025
+    r_by = 0.1
   )
   prob = optimized_prob_details[["prob_choice"]]
   sse = optimized_prob_details[["sse"]]
