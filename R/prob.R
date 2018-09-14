@@ -157,8 +157,6 @@ optimize_probability_of_success_parameter <- function(
     newctr <- newctr + 1
     
     break_signal <- FALSE
-    print(c(prob_choice, sse))
-    print(prob_range)
     for (i in seq(to = length(prob_range), by = n_cores)) {
       distribution_list <- mclapply(
         prob_range[i:min(length(prob_range), i + n_cores - 1)],
@@ -179,30 +177,26 @@ optimize_probability_of_success_parameter <- function(
         e_combined_sorted_binned <- distribution_list[[j]]
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
 
-        print(c(k, sse_bbin))
-
         if (sse_bbin < sse) {
+          prob_and_sse[(counter + 2), 1] <- prob_choice
+          prob_and_sse[(counter + 2), 2] <- sse
+          labels[newctr] = paste(
+            "betabin,prob=",
+            signif(prob_choice, 3),
+            "; SSE=",
+            signif(sse, 3)
+          )
           sse <- sse_bbin
           prob_choice <- k
+          counter <- counter + 1
+          newctr <- newctr + 1
         }
       }
     }
-    prob_and_sse[(counter + 2), 1] <- prob_choice
-    prob_and_sse[(counter + 2), 2] <- sse
-    labels[newctr] = paste(
-      "betabin,prob=",
-      signif(prob_choice, 3),
-      "; SSE=",
-      signif(sse, 3)
-    )
     labels = labels[1:(newctr + 1),]
-    if (
-      signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
-    ) {
+    if (signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)) {
       flag <- FALSE
     }
-    counter <- counter + 1
-    newctr <- newctr + 1
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned,
