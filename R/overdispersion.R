@@ -37,6 +37,7 @@ choose_overdispersion_parameter <- function(
   r_sta = 0.1,
   r_end = 0.99,
   r_by = 0.1,
+  p = 0.5,
   n_cores = detectCores()
 ) {
   counter <- 1
@@ -60,6 +61,7 @@ choose_overdispersion_parameter <- function(
           minN = minN,
           binSize = binSize,
           distrib = "betabinomial",
+          p = p,
           b = k
         )
       },
@@ -160,6 +162,7 @@ optimize_overdispersion_parameter <- function(
             minN = minN,
             binSize = binSize,
             distrib = "betabinomial",
+            p = p,
             b = k
           )
         },
