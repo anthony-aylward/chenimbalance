@@ -142,6 +142,7 @@ optimize_overdispersion_parameter <- function(
     flag <- FALSE
     newctr <- counter
   }
+  sse <- b_and_sse[1, 2]
   while (flag) {
     r_sta <- max(0, b_choice - r_by)
     r_end <- b_choice + r_by
@@ -149,8 +150,6 @@ optimize_overdispersion_parameter <- function(
     b_range <- seq(r_sta, r_end, by = r_by)
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
-    sse <- b_and_sse[1, 2]
-    b_choice <- 0
     
     break_signal <- FALSE
     for (i in seq(to = length(b_range), by = n_cores)) {
