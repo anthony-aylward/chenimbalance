@@ -142,7 +142,6 @@ optimize_overdispersion_parameter <- function(
     flag <- FALSE
     newctr <- counter
   }
-  sse <- b_and_sse[1, 2]
   while (flag) {
     r_sta <- max(0, b_choice - r_by)
     r_end <- b_choice + r_by
