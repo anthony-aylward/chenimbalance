@@ -196,6 +196,7 @@ optimize_probability_of_success_parameter <- function(
       signif(sse, 3)
     )
     labels = labels[1:(newctr + 1),]
+    print(cbind(prob_and_sse[counter + 2], prob_and_sse[counter + 1, 2]))
     if (
       signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
     ) {
