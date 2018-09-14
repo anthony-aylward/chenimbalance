@@ -143,6 +143,9 @@ optimize_probability_of_success_parameter <- function(
     flag <- FALSE
     newctr <- counter
   }
+  sse <- prob_and_sse[counter, 2]
+  prob_and_sse[counter + 2,] <- matrix(c(prob_choice, sse), nrow = 1)
+  counter <- counter + 1
   while (flag) {
     r_sta <- max(0, prob_choice - r_by)
     r_end <- prob_choice + r_by
@@ -150,11 +153,6 @@ optimize_probability_of_success_parameter <- function(
     prob_range <- seq(r_sta, r_end, by = r_by)
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
-    sse <- prob_and_sse[counter, 2]
-
-    prob_and_sse[counter + 2,] <- matrix(c(prob_choice, sse), nrow = 1)
-    counter <- counter + 1
-    newctr <- newctr + 1
     
     break_signal <- FALSE
     print(c(prob_choice, sse))
