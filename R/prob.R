@@ -186,8 +186,6 @@ optimize_probability_of_success_parameter <- function(
       "; SSE=",
       signif(sse, 3)
     )
-    counter <- counter + 1
-    newctr <- newctr + 1
     print(c(prob_and_sse[counter + 2,], prob_and_sse[counter + 1,]))
     labels = labels[1:(newctr + 1),]
     if (
@@ -195,6 +193,8 @@ optimize_probability_of_success_parameter <- function(
     ) {
       flag <- FALSE
     }
+    counter <- counter + 1
+    newctr <- newctr + 1
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned,
