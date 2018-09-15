@@ -188,7 +188,7 @@ optimize_overdispersion_parameter <- function(
         if (sse_bbin < sse) {
           sse <- sse_bbin
           b_choice <- k 
-        } else if (sse_bbin > sse) {
+        } else if (sse_bbin >= sse) {
           break_signal <- TRUE
           break
         }
