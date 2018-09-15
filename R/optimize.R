@@ -79,7 +79,7 @@ alleledb_beta_binomial <- function(
     binSize = binSize,
     r_by = r_by
   )
-  sse <- optimized_prob_details["sse"]
+  sse <- optimized_prob_details[["sse"]]
   while (TRUE) {
     b_prev <- optimized_overdispersion_details[["b_choice"]]
     prob_prev <- optimized_prob_details[["prob_choice"]]
