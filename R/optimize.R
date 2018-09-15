@@ -74,7 +74,7 @@ alleledb_beta_binomial <- function(
     prob_details[["sse"]],
     empirical,
     prob_details[["counter"]],
-    b,
+    optimized_overdispersion_details[["b_choice"]],
     minN = minN,
     binSize = binSize,
     r_by = r_by
