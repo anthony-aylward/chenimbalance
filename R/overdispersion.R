@@ -171,24 +171,14 @@ optimize_overdispersion_parameter <- function(
       for (j in 1:min(n_cores, length(b_range) - i)) {
         k <- b_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
-
-        ## minimize sse for betabinomials
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
-        b_and_sse[(counter + 2), 1] <- k
-        b_and_sse[(counter + 2), 2] <- sse_bbin
-        labels[newctr] = paste(
-          "betabin,b=",
-          signif(k, 3),
-          "; SSE=",
-          signif(sse_bbin, 3)
-        )
         
         print(c(k, sse_bbin))
 
         if (sse_bbin < sse) {
           sse <- sse_bbin
           b_choice <- k 
-        } else if (sse_bbin >= sse) {
+        } else if (sse_bbin > sse) {
           break_signal <- TRUE
           break
         }
@@ -200,6 +190,14 @@ optimize_overdispersion_parameter <- function(
         break
       }
     }
+    b_and_sse[(counter + 2), 1] <- b_choice
+    b_and_sse[(counter + 2), 2] <- sse
+    labels[newctr] = paste(
+      "betabin,b=",
+      signif(k, 3),
+      "; SSE=",
+      signif(sse_bbin, 3)
+    )
     labels = labels[1:(newctr + 1),]
     if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
       flag <- FALSE
