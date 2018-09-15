@@ -58,8 +58,6 @@ alleledb_beta_binomial <- function(
     minN = minN,
     binSize = binSize
   )
-  b = optimized_overdispersion_details[["b_choice"]]
-  sse = optimized_overdispersion_details[["sse"]]
   prob_details <- choose_probability_of_success_parameter(
     w_grad,
     w,
@@ -81,6 +79,7 @@ alleledb_beta_binomial <- function(
     binSize = binSize,
     r_by = r_by
   )
+  sse <- optimized_prob_details["sse"]
   while (TRUE) {
     b_prev <- optimized_overdispersion_details[["b_choice"]]
     prob_prev <- optimized_prob_details[["prob_choice"]]

@@ -150,6 +150,8 @@ optimize_overdispersion_parameter <- function(
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
     
+    print(c(b_choice, sse))
+    print(b_range)
     break_signal <- FALSE
     for (i in seq(to = length(b_range), by = n_cores)) {
       distribution_list <- mclapply(
@@ -181,6 +183,8 @@ optimize_overdispersion_parameter <- function(
           signif(sse_bbin, 3)
         )
         
+        print(c(k, sse_bbin))
+
         if (sse_bbin < sse) {
           sse <- sse_bbin
           b_choice <- k 
