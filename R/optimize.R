@@ -63,7 +63,7 @@ alleledb_beta_binomial <- function(
     w,
     empirical,
     sse,
-    b,
+    optimized_overdispersion_details[["b_choice"]],
     r_by = r_by
   )
   optimized_prob_details <- optimize_probability_of_success_parameter(
