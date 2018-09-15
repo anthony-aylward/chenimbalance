@@ -153,8 +153,6 @@ optimize_probability_of_success_parameter <- function(
     labels <- matrix(0, nrow = 50, ncol = 1)
     newctr <- 1
     
-    print(c(prob_choice, sse))
-    print(prob_range)
     break_signal <- FALSE
     for (i in seq(to = length(prob_range), by = n_cores)) {
       distribution_list <- mclapply(
@@ -175,8 +173,6 @@ optimize_probability_of_success_parameter <- function(
         k <- prob_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)
- 
-        print(c(k, sse_bbin))
 
         if (sse_bbin < sse) {
           sse <- sse_bbin
