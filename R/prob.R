@@ -190,7 +190,8 @@ optimize_probability_of_success_parameter <- function(
     )
     labels = labels[1:(newctr + 1),]
     if (
-      signif(prob_and_sse[counter + 2, 2], 3) == signif(prob_and_sse[counter + 1, 2], 3)
+      signif(prob_and_sse[counter + 2, 2], 3)
+      == signif(prob_and_sse[counter + 1, 2], 3)
     ) {
       flag <- FALSE
     }

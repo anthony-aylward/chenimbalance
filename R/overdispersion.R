@@ -178,16 +178,7 @@ optimize_overdispersion_parameter <- function(
         if (sse_bbin < sse) {
           sse <- sse_bbin
           b_choice <- k 
-        } else if (sse_bbin > sse) {
-          break_signal <- TRUE
-          break
         }
-        
-        counter <- counter + 1
-        newctr <- newctr + 1
-      }
-      if (break_signal) {
-        break
       }
     }
     b_and_sse[(counter + 2), 1] <- b_choice
@@ -199,9 +190,14 @@ optimize_overdispersion_parameter <- function(
       signif(sse_bbin, 3)
     )
     labels = labels[1:(newctr + 1),]
-    if (signif(b_and_sse[counter + 2, 2], 3) == signif(b_and_sse[counter + 1, 2], 3)) {
+    if (
+      signif(b_and_sse[counter + 2, 2], 3)
+      == signif(b_and_sse[counter + 1, 2], 3)
+    ) {
       flag <- FALSE
     }
+    counter <- counter + 1
+    newctr <- newctr + 1
   }
   list(
     e_combined_sorted_binned = e_combined_sorted_binned,
