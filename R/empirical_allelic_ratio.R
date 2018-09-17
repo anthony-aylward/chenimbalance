@@ -16,7 +16,6 @@ empirical_allelic_ratio <- function(data, bins, maxN, minN = 6, plot = FALSE) {
   data.match <- data[data[["total"]] <= maxN & data[["total"]] >= minN,]
   h <- hist(
     data.match[["allelicRatio"]],
-    xlim = range(0, 1),
     breaks = bins,
     right = TRUE,
     plot = plot
