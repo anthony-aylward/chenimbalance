@@ -85,7 +85,6 @@ alleledb_beta_binomial <- function(
   while (TRUE) {
     b_prev <- optimized_overdispersion_details[["b_choice"]]
     prob_prev <- optimized_prob_details[["prob_choice"]]
-    print(c(b_prev, prob_prev, sse))
     overdispersion_details <- choose_overdispersion_parameter(
       w_grad,
       w,
