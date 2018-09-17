@@ -138,14 +138,14 @@ optimize_probability_of_success_parameter <- function(
   r_by = 0.1,
   n_cores = detectCores()
 ) {
-  flag <- TRUE
+  flag <- 3
   if (prob_choice >= 0.9) {
     flag <- FALSE
     newctr <- counter
   }
   prob_and_sse[counter + 2,] <- matrix(c(prob_choice, sse), nrow = 1)
   counter <- counter + 1
-  while (flag) {
+  while (flag > 0) {
     r_sta <- max(0, prob_choice - r_by)
     r_end <- prob_choice + r_by
     r_by <- r_by / 2
@@ -193,7 +193,7 @@ optimize_probability_of_success_parameter <- function(
       signif(prob_and_sse[counter + 2, 2], 3)
       == signif(prob_and_sse[counter + 1, 2], 3)
     ) {
-      flag <- FALSE
+      flag <- flag - 1
     }
     counter <- counter + 1
     newctr <- newctr + 1

@@ -137,12 +137,12 @@ optimize_overdispersion_parameter <- function(
   r_by = 0.1,
   n_cores = detectCores()
 ) {
-  flag <- TRUE
+  flag <- 3
   if (b_choice >= 0.9) {
     flag <- FALSE
     newctr <- counter
   }
-  while (flag) {
+  while (flag > 0) {
     r_sta <- max(0, b_choice - r_by)
     r_end <- b_choice + r_by
     r_by <- r_by / 2
@@ -190,7 +190,7 @@ optimize_overdispersion_parameter <- function(
       signif(b_and_sse[counter + 2, 2], 3)
       == signif(b_and_sse[counter + 1, 2], 3)
     ) {
-      flag <- FALSE
+      flag <- flag - 1
     }
     counter <- counter + 1
     newctr <- newctr + 1
