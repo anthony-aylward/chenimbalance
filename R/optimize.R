@@ -45,7 +45,8 @@ alleledb_beta_binomial <- function(
     w_grad,
     w,
     empirical,
-    sse
+    sse,
+    r_by = r_by
   )
   optimized_overdispersion_details <- optimize_overdispersion_parameter(
     w_grad,
@@ -56,7 +57,8 @@ alleledb_beta_binomial <- function(
     empirical,
     overdispersion_details[["counter"]],
     minN = minN,
-    binSize = binSize
+    binSize = binSize,
+    r_by = r_by
   )
   prob_details <- choose_probability_of_success_parameter(
     w_grad,
@@ -89,7 +91,8 @@ alleledb_beta_binomial <- function(
       w,
       empirical,
       sse,
-      p = prob_prev
+      p = prob_prev,
+      r_by = r_by
     )
     optimized_overdispersion_details <- optimize_overdispersion_parameter(
       w_grad,
@@ -101,7 +104,8 @@ alleledb_beta_binomial <- function(
       overdispersion_details[["counter"]],
       minN = minN,
       binSize = binSize,
-      p = prob_prev
+      p = prob_prev,
+      r_by = r_by
     )
     sse <- optimized_overdispersion_details[["sse"]]
     if (
