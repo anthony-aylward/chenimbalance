@@ -6,7 +6,7 @@
 \usage{
 optimize_probability_of_success_parameter(w_grad, w, prob_and_sse,
   prob_choice, sse, empirical, counter, b, minN = 6, binSize = 40,
-  r_by = 0.1, n_cores = detectCores())
+  r_by = 0.1, cores = detectCores())
 }
 \arguments{
 \item{w_grad}{w_grad}
@@ -29,7 +29,7 @@ optimize_probability_of_success_parameter(w_grad, w, prob_and_sse,
 
 \item{r_by}{r_by}
 
-\item{n_cores}{number of cores to use}
+\item{cores}{number of cores to use}
 }
 \value{
 list

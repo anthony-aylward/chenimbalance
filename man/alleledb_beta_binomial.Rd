@@ -4,7 +4,8 @@
 \alias{alleledb_beta_binomial}
 \title{optimize beta-binomial parameters}
 \usage{
-alleledb_beta_binomial(total, allelic_ratio, minN = 6, binSize = 40)
+alleledb_beta_binomial(total, allelic_ratio, minN = 6, binSize = 40,
+  r_by = 0.1)
 }
 \arguments{
 \item{total}{integer; total number of reads at each site}

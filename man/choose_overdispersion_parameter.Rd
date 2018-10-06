@@ -6,7 +6,7 @@
 \usage{
 choose_overdispersion_parameter(w_grad, w, empirical, sse, minN = 6,
   binSize = 40, b_choice = 0, r_sta = 0.1, r_end = 0.99,
-  r_by = 0.1, n_cores = detectCores())
+  r_by = 0.1, p = 0.5, cores = detectCores())
 }
 \arguments{
 \item{w_grad}{w_grad}
@@ -25,7 +25,7 @@ choose_overdispersion_parameter(w_grad, w, empirical, sse, minN = 6,
 
 \item{r_by}{step of the parameter range}
 
-\item{n_cores}{number of cores to use}
+\item{cores}{number of cores to use}
 }
 \value{
 list

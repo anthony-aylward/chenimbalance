@@ -24,7 +24,7 @@
 #' @param binSize approximate number of bins
 #' @param r_sta,r_end start and end of the parameter range
 #' @param r_by step of the parameter range
-#' @param n_cores number of cores to use
+#' @param cores number of cores to use
 #' @return list
 #' @export
 choose_probability_of_success_parameter <- function(
@@ -39,7 +39,7 @@ choose_probability_of_success_parameter <- function(
   r_sta = 0.1,
   r_end = 0.99,
   r_by = 0.1,
-  n_cores = detectCores()
+  cores = detectCores()
 ) {
   counter <- 1
   prob_and_sse = matrix(
@@ -53,9 +53,9 @@ choose_probability_of_success_parameter <- function(
   prob_range <- seq(r_sta, r_end, by = r_by)
   
   break_signal <- FALSE
-  for (i in seq(to = length(prob_range), by = n_cores)) {
+  for (i in seq(to = length(prob_range), by = cores)) {
     distribution_list <- mclapply(
-      prob_range[i:min(length(prob_range), i + n_cores - 1)],
+      prob_range[i:min(length(prob_range), i + cores - 1)],
       function(k) {
         nulldistrib(
           w,
@@ -66,9 +66,9 @@ choose_probability_of_success_parameter <- function(
           p = k
         )
       },
-      mc.cores = n_cores
+      mc.cores = cores
     )
-    for (j in 1:min(n_cores, length(prob_range) - i)) {
+    for (j in 1:min(cores, length(prob_range) - i)) {
       k <- prob_range[[i + j - 1]]
       e_combined_sorted_binned <- distribution_list[[j]]
       
@@ -121,7 +121,7 @@ choose_probability_of_success_parameter <- function(
 #' @param minN minimum coverage level
 #' @param binSize approximate number of bins
 #' @param r_by r_by
-#' @param n_cores number of cores to use
+#' @param cores number of cores to use
 #' @return list
 #' @export
 optimize_probability_of_success_parameter <- function(
@@ -136,7 +136,7 @@ optimize_probability_of_success_parameter <- function(
   minN = 6,
   binSize = 40,
   r_by = 0.1,
-  n_cores = detectCores()
+  cores = detectCores()
 ) {
   flag <- 3
   if (prob_choice >= 0.9) {
@@ -154,9 +154,9 @@ optimize_probability_of_success_parameter <- function(
     newctr <- 1
     
     break_signal <- FALSE
-    for (i in seq(to = length(prob_range), by = n_cores)) {
+    for (i in seq(to = length(prob_range), by = cores)) {
       distribution_list <- mclapply(
-        prob_range[i:min(length(prob_range), i + n_cores - 1)],
+        prob_range[i:min(length(prob_range), i + cores - 1)],
         function(k) {
           nulldistrib(
             w,
@@ -167,9 +167,9 @@ optimize_probability_of_success_parameter <- function(
             b = b
           )
         },
-        mc.cores = n_cores
+        mc.cores = cores
       )
-      for (j in 1:min(n_cores, length(prob_range) - i)) {
+      for (j in 1:min(cores, length(prob_range) - i)) {
         k <- prob_range[[i + j - 1]]
         e_combined_sorted_binned <- distribution_list[[j]]
         sse_bbin <- sum(w_grad * (empirical - e_combined_sorted_binned[,2])^2)

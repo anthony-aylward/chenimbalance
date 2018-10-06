@@ -107,6 +107,9 @@ alleledb_beta_binomial <- function(
       r_by = r_by
     )
     sse <- optimized_overdispersion_details[["sse"]]
+    e_combined_sorted_binned <- optimized_overdispersion_details[[
+      "e_combined_sorted_binned"
+    ]]
     if (
       signif(optimized_overdispersion_details[["b_choice"]], 3)
       == signif(b_prev, 3)
@@ -135,6 +138,9 @@ alleledb_beta_binomial <- function(
       r_by = r_by
     )
     sse <- optimized_prob_details[["sse"]]
+    e_combined_sorted_binned <- optimized_prob_details[[
+      "e_combined_sorted_binned"
+    ]]
     if (
       signif(optimized_prob_details[["prob_choice"]], 3)
       == signif(prob_prev, 3)
