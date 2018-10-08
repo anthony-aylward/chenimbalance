@@ -22,7 +22,6 @@ alleledb_beta_binomial <- function(
   counts <- (
     data.frame(total = total, allelicRatio = allelic_ratio)[total >= minN,]
   )
-  print(names(counts))
   empirical <- empirical_allelic_ratio(
     counts,
     bins,
