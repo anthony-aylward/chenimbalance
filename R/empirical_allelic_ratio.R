@@ -13,7 +13,6 @@
 #' @return Histogram of allelic ratios
 #' @export
 empirical_allelic_ratio <- function(data, bins, maxN, minN = 6, plot = FALSE) {
-  print(names(data))
   data.match <- data[data[["total"]] <= maxN & data[["total"]] >= minN,]
   h <- hist(
     data.match[["allelicRatio"]],
