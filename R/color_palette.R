@@ -6,8 +6,7 @@
 #'
 #' @return A character vector representing the color palette
 #' @export
-#' @seealso \code{\link{choose_overdispersion_parameter}}
-color_palette <- function() {
+chenimbalance_color_palette <- function() {
   c(
     "green", "blue", "orange","cyan", "pink", "purple", "brown", "black",
     "slategray1", "violetred", "tan", "deeppink", "darkgreen", "orchid",
